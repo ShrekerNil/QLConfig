@@ -142,5 +142,5 @@ else
     echo_info "Nothing to push, Skipping ..."
 fi
 
-new_line
-read -p "PRESSING ENTER TO EXIT ... "
+# new_line
+# read -p "PRESSING ENTER TO EXIT ... "
