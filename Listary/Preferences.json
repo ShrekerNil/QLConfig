@@ -1,0 +1,181 @@
+{
+  "AppConfigs": {
+    "TypeConfigs": {
+      "WindowsExplorer": {
+        "Enabled": false,
+        "EnableMouseMiddleClick": false,
+        "EnableMouseDoubleClick": false,
+        "EnableInstantTypeSearch": false
+      },
+      "FileDialog": {
+        "Enabled": false,
+        "EnableMouseMiddleClick": false,
+        "EnableMouseDoubleClick": false,
+        "EnableInstantTypeSearch": false
+      },
+      "FolderDialog": {
+        "Enabled": false
+      },
+      "Desktop": {
+        "Enabled": false,
+        "EnableMouseMiddleClick": false,
+        "EnableMouseDoubleClick": false,
+        "EnableInstantTypeSearch": false
+      },
+      "DirectoryOpus": {
+        "Enabled": false,
+        "EnableMouseMiddleClick": false
+      },
+      "TotalCommander": {
+        "Enabled": false,
+        "EnableMouseMiddleClick": false
+      },
+      "XYplorer": {
+        "Enabled": false,
+        "EnableMouseMiddleClick": false
+      },
+      "Bandizip": {
+        "Enabled": false,
+        "EnableMouseMiddleClick": false
+      },
+      "AutoCAD": {
+        "Enabled": false,
+        "EnableMouseMiddleClick": false,
+        "EnableMouseDoubleClick": false
+      },
+      "xplorer2": {
+        "Enabled": false,
+        "EnableMouseMiddleClick": false
+      },
+      "FreeCommander": {
+        "Enabled": false,
+        "EnableMouseMiddleClick": false
+      }
+    },
+    "PathConfigs": {}
+  },
+  "Menus": {
+    "Favorites": {
+      "Deletions": [],
+      "Moves": [],
+      "Insertions": [],
+      "Updates": []
+    }
+  },
+  "DiskSearch": {
+    "FolderPriority": {
+      "Deletions": [],
+      "Moves": [],
+      "Insertions": [
+        {
+          "Index": -1,
+          "Info": null,
+          "Item": {
+            "Folder": "D:\\Programs\\Tools",
+            "Priority": 1
+          }
+        }
+      ],
+      "Updates": []
+    },
+    "FileNamePriority": {
+      "Deletions": [],
+      "Moves": [],
+      "Insertions": [],
+      "Updates": []
+    },
+    "SearchFilter": {
+      "Deletions": [],
+      "Moves": [],
+      "Insertions": [],
+      "Updates": []
+    },
+    "DisabledNtfsVolumes": [],
+    "CustomFolders": []
+  },
+  "Commands": {
+    "Items": {
+      "Deletions": [],
+      "Moves": [],
+      "Insertions": [],
+      "Updates": []
+    }
+  },
+  "WebSearch": {
+    "Items": {
+      "Deletions": [],
+      "Moves": [],
+      "Insertions": [],
+      "Updates": [
+        {
+          "Id": "ecb51462-cb27-4b89-ae53-333b4550f489",
+          "UpdatedProperties": {
+            "Keyword": "gg"
+          }
+        },
+        {
+          "Id": "b36cf1bb-5527-42d8-bf91-d034bcbf057b",
+          "UpdatedProperties": {
+            "Keyword": "bd"
+          }
+        },
+        {
+          "Id": "5ac62036-62aa-49d3-866b-d041bc7b1b76",
+          "UpdatedProperties": {
+            "Keyword": "gm"
+          }
+        },
+        {
+          "Id": "4ed886fb-1df0-4fd0-abc1-810fc180e647",
+          "UpdatedProperties": {
+            "Keyword": "tw"
+          }
+        },
+        {
+          "Id": "5014b42a-884d-40d3-835d-69079dd9fc51",
+          "UpdatedProperties": {
+            "Keyword": "yg"
+          }
+        },
+        {
+          "Id": "95147e79-6274-4127-98bb-09d9ffa2a39a",
+          "UpdatedProperties": {
+            "Keyword": "gmap"
+          }
+        },
+        {
+          "Id": "610a486d-0028-4739-8eb6-50f5247c918f",
+          "UpdatedProperties": {
+            "Keyword": "amz"
+          }
+        },
+        {
+          "Id": "1744aa0c-751a-495f-aac5-6910e7406229",
+          "UpdatedProperties": {
+            "Keyword": "fb"
+          }
+        }
+      ]
+    }
+  },
+  "Actions": {
+    "Items": {
+      "Deletions": [],
+      "Moves": [],
+      "Insertions": [],
+      "Updates": []
+    }
+  },
+  "Settings": {
+    "General.Language": "en",
+    "Hotkey.EnableDoubleCtrl": false,
+    "Hotkey.ShowListary": 544,
+    "Listary5.SettingsImported": true
+  },
+  "Extensions": {
+    "Extensions": {
+      "1a63ea9d-bf25-431f-96e3-17b80027efab": {},
+      "f86966a8-24a9-46a0-baea-11e861a5c2c3": {}
+    }
+  }
+}

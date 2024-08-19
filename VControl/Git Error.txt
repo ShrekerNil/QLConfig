@@ -1,0 +1,115 @@
+Git常见报错总结：
+================================================================================================================
+Shreker@ShrekerNil MINGW64 /d/GitRepo/GitLab/架构四期P8商城资料
+$ git clone http://39.101.213.88/IS4-p8/ziliao.git
+Cloning into 'ziliao'...
+libpng warning: iCCP: cHRM chunk does not match sRGB
+libpng warning: iCCP: cHRM chunk does not match sRGB
+remote: Enumerating objects: 24, done.
+remote: Counting objects: 100% (24/24), done.
+remote: Compressing objects: 100% (24/24), done.
+error: RPC failed; curl 18 transfer closed with outstanding read data remaining
+ffatal: early EOF
+atal: the remote end hung up unexpectedly
+fatal: index-pack failed
+
+https://blog.csdn.net/it_liuchengli/article/details/77040806
+
+https://cloud.tencent.com/developer/article/1660797
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+解决方案有三种，一种是增大缓存区；二是浅克隆，比如只克隆每个文件只取最近一次提交，三是换协议：具体解决方案如下：
+
+一，加大缓存区
+git config --global http.postBuffer 524288000
+git config --global http.postBuffer 1048576000
+这个大约是500M
+二、少clone一些，–-depth 1
+git clone https://github.com/flutter/flutter.git --depth 1
+–-depth 1的含义是复制深度为1，就是每个文件只取最近一次提交，不是整个历史版本。
+三、换协议
+clone http方式换成SSH的方式，即 https:// 改为 git://
+例如git clone https://github.com/test/test.git
+换成git clone git://github.com/test/test.git
+
+记录一下今天在GitHub上拉取代码的报错及解决方法
+
+原因可能有文件过大、网速太差、以及一些国外资源因为墙的因素影响等等
+
+解决方式：
+1、文件太大,解决方式为git添加 compression 配置项
+  git config --global core.compression -1
+
+  compression 是压缩的意思，从 clone 的终端输出就知道，服务器会压缩目标文件，然后传输到客户端，客户端再解压。
+  取值为 [-1, 9]，数字越大，压缩越慢，当然得到的文件会越小
+  -1 以 zlib 为默认压缩库，
+  0 表示不进行压缩，
+  1…9 是压缩速度与最终获得文件大小的不同程度的权衡，
+
+2、可以增加git的缓存大小
+
+  git config --global http.postBuffer 1048576000 （1G）
+
+3、配置git的最低速和最低速时间
+
+  git config --global http.lowSpeedLimit 0
+  git config --global http.lowSpeedTime 999999 //单位 秒
+
+--global配置对当前用户生效，如果需要对所有用户生效，则用–-system
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+================================================================================================================
+
+$ git clone http://39.101.213.88/IS4-p8/ziliao.git
+Cloning into 'ziliao'...
+remote: Enumerating objects: 24, done.
+remote: Counting objects: 100% (24/24), done.
+remote: Compressing objects: 100% (24/24), done.
+fatal: pack has bad object at offset 2733253161: inflate returned -5
+fatal: index-pack failed
+
+================================================================================================================
+
+git.exe clone --progress -v "http://39.101.213.88/kuaile/docker-k8s.git" "D:\GitRepo\GitLab\KuaiLe\docker-k8s"
+Cloning into 'D:\GitRepo\GitLab\KuaiLe\docker-k8s'...
+POST git-upload-pack (175 bytes)
+remote: Enumerating objects: 121, done.
+remote: Counting objects: 100% (121/121), done.
+remote: Compressing objects: 100% (80/80), done.
+fatal: pack has bad object at offset 36995783: inflate returned 1
+fatal: index-pack failed
+git did not exit cleanly (exit code 128) (1433469 ms @ 21/07/15 21:28:51)
+
+https://stackoverflow.com/questions/57250524/git-clone-fatal
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Solution:
+Turn of compression. Git clone partially. When it is successful, clone the rest.
+
+1) First, turn off Git compression.
+
+git config --global core.compression 0
+2) Then do a partial clone of the repository with --depth 1 parameter. 
+Replace username@domain.com/path/to/git_repo/ with the actual path to the repository.
+
+git clone --depth 1 ssh://username@domain.com/path/to/git_repo/
+3) Next, retrieve the rest of the repository.
+
+git fetch --unshallow
+4) Finally, finish it up with a regular pull.
+
+git pull --all
+These methods solved my problem. Hope it helps!
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+================================================================================================================
+
+
+Shreker@ShrekerNil MINGW64 /d/GitRepo/GitLab/KuaiLe
+$ git clone --depth=1 http://39.101.213.88/kuaile/docker-k8s.git
+Cloning into 'docker-k8s'...
+remote: Enumerating objects: 79, done.
+remote: Counting objects: 100% (79/79), done.
+remote: Compressing objects: 100% (68/68), done.
+error: inflate returned -5/79)
+fatal: unpack-objects failed
+
+git fetch --depth 1 origin http://39.101.213.88/kuaile/docker-k8s.git

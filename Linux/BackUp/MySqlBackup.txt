@@ -1,0 +1,1 @@
+0 22 * * * /root/MysqlData/backup_mysql.sh &> /root/MysqlData/backup.log

@@ -1,0 +1,25 @@
+# @Author:              Shreker
+# @Date:                2023-09-05 09:21:47
+# @Description:         初始化ZIP版本MongoDB的安装
+# @Source               https://blog.csdn.net/mghoumin/article/details/126899183
+# @Using:
+#         1、将本文件拷贝至安装的根目录，直接运行即可
+#         2、安装服务：
+            mongod --dbpath D:\Programs\Coding\MongoDB\data\db --logpath D:\Programs\Coding\MongoDB\logs\mongodb.log --logappend --install --serviceName "MongoDB"
+
+mkdir -p ./data/db
+
+mkdir ./logs
+
+touch ./logs/mongodb.log
+
+touch ./mongo.config
+
+cat>./mongo.config<<EOF
+dbpath=D:\Programs\Coding\MongoDB\data\db
+logpath=D:\Programs\Coding\MongoDB\logs\mongodb.log
+# logappend=true
+# journal=true
+quite=false
+port=27017
+EOF

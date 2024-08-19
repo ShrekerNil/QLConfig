@@ -1,0 +1,2 @@
+【阿里云】尊敬的shrekernil@qq.com，CentOS 8操作系统版本结束了生命周期，阿里云镜像站也移除了相应镜像源。 如果您的业务过渡期仍需要使用CentOS 8中的一些安装包，建议切换至CentOS-Vault源, 具体配置请点击：
+http://a.aliyun.com/f1.KrkzV

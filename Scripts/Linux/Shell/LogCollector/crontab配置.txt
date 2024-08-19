@@ -1,0 +1,5 @@
+ */1 * * * * sh /export/servers/shell/CollectLogFile2Hdfs.sh
+ */1 * * * * sh  source /etc/profile;sh /export/servers/shell/uploadFile2Hdfs.v1.sh
+ 
+# �༭������crontab -e
+# �鿴������crontab -l

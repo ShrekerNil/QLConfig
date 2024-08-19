@@ -1,0 +1,28 @@
+https://zhaokaifeng.com/?p=1074
+
+
+Windows 10
+
+除非特殊声明，以下命令都运行在管理员权限下的PowerShell中
+
+
+显示网卡信息：
+netsh interface show interface
+
+
+禁用网卡的命令格式：
+  netsh interface set interface name="接口名称" admin=DISABLE
+例如：
+  netsh interface set interface name="WLAN" admin=DISABLE
+  netsh interface set interface name="ytw" admin=DISABLE
+  
+启用网卡的命令格式：
+  netsh interface set interface name="接口名称" admin=ENABLE
+例如：
+  netsh interface set interface name="WLAN" admin=ENABLE
+  netsh interface set interface name="ytw" admin=ENABLE
+
+
+我们也可以将上面的命令写入到.bat的批处理命令中使用，需要注意的有以下两点：
+运行该批处理命令需要管理员权限
+"接口名称"如果是中文则无法获得目标执行结果，如果想要成功执行，需要在“控制面板\网络和 Internet\网络连接”中将其重命名为不包含中文的名字.

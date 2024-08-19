@@ -1,0 +1,8 @@
+1. Device Manager → Class GUID
+{4d36e972-e325-11ce-bfc1-08002be10318}
+
+2. gpedit.msc
+    - Computer Configuration → Administrative Templates → System → Device installation → Device installation Restrictions →
+    Prevent installation of devices using drivers that match these device setup class
+    - Enabled
+    - Fufill the GUID value in the `Show...`
