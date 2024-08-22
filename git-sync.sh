@@ -129,7 +129,7 @@ else
 fi
 
 print_start_line
-echo_info "Pulling ... for ${cur_dir}"
+echo_info "Pulling ${cur_dir} from Gitee ..."
 result=`git pull gitee main`
 judgement "git pull" $? "$result"
 
