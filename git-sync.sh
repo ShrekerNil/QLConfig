@@ -130,7 +130,7 @@ fi
 
 print_start_line
 echo_info "Pulling ... for ${cur_dir}"
-result=`git pull`
+result=`git pull gitee main`
 judgement "git pull" $? "$result"
 
 # Push to github main
@@ -153,5 +153,9 @@ else
     echo_info "Nothing to push, Skipping ..."
 fi
 
-new_line
-read -p "PRESSING ENTER TO EXIT ... "
+
+# pause when scripts without param
+if [[ -z $1 ]]; then
+    new_line
+    read -p "PRESSING ENTER TO EXIT ... "
+fi
