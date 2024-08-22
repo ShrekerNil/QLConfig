@@ -49,9 +49,9 @@ function start_process() {
     echo_purplebg_whitetext "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
     echo_info               "+  Start Synchronizing Root: ${cur_dir}"
     echo_purplebg_whitetext "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-    
+
     # echo ${cur_dir} >> test.txt
-    
+
     for sub_dir in ${cur_dir}/*; do
         if test -d ${sub_dir} ; then
             cd ${sub_dir}
@@ -59,18 +59,19 @@ function start_process() {
             echo_bluebg_whitetext ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
             echo_info             "  Found Sub Dir: `basename ${sub_dir}`"
             echo_bluebg_whitetext "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-            
+
             if check_excludes ${sub_dir}; then
                 echo_info "${sub_dir} excluded, Skipping ...";
                 continue
             fi
-            
+
             if [[ -d "${sub_dir}/.git" ]]; then
                 if [[ -f "mine" ]]; then
                     new_line
                     echo_info "Synchronizing AUTO Git Repo: ${sub_dir}"
                     new_line
-                    bash /d/QLRepo/QLNotes/Config/VControl/Scripts/git-sync.sh `pwd`
+                    # bash /d/QLRepo/QLNotes/Config/VControl/Scripts/git-sync.sh `pwd`
+                    bash ${sub_dir}/git-sync.sh `pwd`
                     continue
                 else
                     new_line

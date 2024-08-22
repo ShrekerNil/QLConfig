@@ -10,7 +10,7 @@
 #ifconfig eth0 192.168.0.20 netmask 255.255.255.0
 #修改/etc/sysconfig/network-scripts/ifcfg-eth0
 
-#修改默认网关
+# 修改默认网关
 #route add default gw 192.168.0.254
 #修改/etc/sysconfig/network-scripts/ifcfg-eth0
 
