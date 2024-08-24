@@ -1,6 +1,0 @@
-~/.bash_profile | /etc/profile
-export JAVA_HOME=/root/programs/jdk_1.8.0_201
-export PATH=$JAVA_HOME/bin:$PATH
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-
-source

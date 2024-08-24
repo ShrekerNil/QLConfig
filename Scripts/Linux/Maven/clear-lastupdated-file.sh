@@ -1,1 +1,0 @@
-find <maven-repo-path> -name "*.lastUpdated" -exec grep -q "Could not transfer" {} \; -print -exec rm {} \;find /app/maven/localRepository -name "*.lastUpdated" -exec grep -q "Could not transfer" {} \; -print -exec rm {} \;

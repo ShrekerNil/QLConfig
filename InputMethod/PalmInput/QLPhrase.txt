@@ -1,0 +1,37 @@
+;注：关于助记符
+;从v6.8.0.26起，助记符功能有了新的功能，能够改变单候选短语的显示位置，取值范围1～9
+;如haha[1]=^_^，则在候选栏首位显示。这个显示顺序的设定优于全局设置-“单个短语候选位置”
+;如haha[哈哈]=^_^，则仍然兼容以往的助记符表情符号
+
+ssn[1]=shrekernil@sina.com
+qsn[1]=shrekernil@qq.com
+nw[2]=<span style="white-space:nowrap;">不换行</span>
+ua[2]=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
+d[2]=#$year/$month_mm/$day_dd
+t[1]=#$fullhour:$minute:$second
+bc[1]=baidu.com
+br[1]=<br/>
+cb[1]=```sh
+dt[1]=#$year/$month_mm/$day_dd $fullhour:$minute:$second
+gc[1]=google.com
+gf[1]=gwinabc@foxmail.com
+ll[1]=_
+nt[1]=//
+rw[1]=Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Enum\HID\*\*\Device` Parameters FlipFlopWheel -EA 0 | ForEach-Object { Set-ItemProperty $_.PSPath FlipFlopWheel 1 }
+td[1]=// TODO
+amz[1]=AMZ
+asin[1]=ASIN
+css[2]=document.querySelectorAll("")
+gls[1]=LucasSeater@gmail.com
+gsl[1]=Shreker.Long@gmail.com
+kjja[1]=Alt +
+kjjc[1]=Ctrl +
+kjjs[1]=Shift +
+list[2]=Listing
+mcpl[1]=<plugin>
+mvnist[1]=clean install -Dmaven.test.skip=true -Pdev
+note[3]=/** *  * @author ShrekerNil ${YEAR}/${MONTH}/${DAY} */
+ref[1]=[]()
+sku[1]=SKU
+spu[1]=SPU
+vue[1]=Vue

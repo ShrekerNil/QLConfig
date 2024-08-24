@@ -1,0 +1,21 @@
+Npp的配置
+1. 安装新的Npp之后,把本文件夹中的两个配置文件(config.xml|shortcuts.xml)
+拷贝到Npp安装的根目录即可
+2. 修改主文件的名称
+3. 设置关联项:遇到一个文件属性中关联一个,不要全部关联
+
+
+
+字符换行脚本:
+1. 安装插件NppExec
+2. 在Plugins->NppExec->Execute...保存这个脚本并起个名字
+  ```
+  sci_sendmsg SCI_SETWRAPMODE SC_WRAP_CHAR
+  npp_console 0
+  ```
+3. 在Plugins->NppExec->Advanced Options...把刚才保存的脚本设置成启动执行即可
+
+
+注意:
+从8.3.3开始, 不再支持便携版添加右键菜单的文件
+https://github.com/notepad-plus-plus/notepad-plus-plus/tree/v8.3.3/PowerEditor/bin
