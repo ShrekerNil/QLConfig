@@ -333,6 +333,27 @@ C:\Users\Shreker\AppData\Local\Microsoft\Edge\User Data\Default\Bookmarks
    - BIOS Setup: `F2`
    - Boot Menu: `F7`
 
+## 统一修改目录的权限
+
+### 修改文件(夹)的所有者
+
+```cmd
+# 没有访问权的时候，使用takeown夺取所有权
+takeown /f "D:\QLRepo" /r
+> SUCCESS: The file (or folder): "D:\QLRepo\..." now owned by user "SHREKERNIL\Shreker".
+
+# 有访问权，把所有权设置为别的用户的时候，使用：
+icacls "D:\QLRepo" /setowner Administrators /t /c /q
+```
+
+### 修改文件(夹)的控制权限
+
+```cmd
+icacls "D:\QLRepo" /grant Users:F /t /c /q
+icacls "D:\QLRepo" /grant SHREKERNIL\Shreker:F /t
+icacls "D:\QLRepo" /grant Administrators:F /t /c /q
+```
+
 
 
 # 注册表
