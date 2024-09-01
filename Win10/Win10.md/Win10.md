@@ -669,6 +669,20 @@ doskey ll=ls -l
 
 1. 系统配置对话框：msconfig
 
+# 禁用更新
+
+## 禁用系统更新
+
+
+
+## 禁用软件更新
+
+### 禁用Google Chrome更新
+
+打开 `taskschd.msc`，即 `Task Scheduler`，关闭Chrome更新的计划任务
+
+
+
 # 新机开荒
 
 ## 开机
