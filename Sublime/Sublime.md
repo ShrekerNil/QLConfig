@@ -28,7 +28,7 @@
 
 ## 我的配置
 
-### 配置
+### 偏好设置
 
 ```json
 {
@@ -37,13 +37,15 @@
     "auto_complete_commit_on_tab": false,
     "auto_hide_menu": false,
     "auto_hide_tabs": false,
+    "auto_wrap_break_long_word": true,
     "block_caret": false,
     "bold_folder_labels": true,
     "caret_extra_bottom": 0,
     "caret_extra_top": 0,
     "caret_extra_width": 1,
     "caret_style": "smooth",
-    "color_scheme": "Mariana.sublime-color-scheme",
+    "close_find_after_find_all": false,
+    "close_find_after_replace_all": false,
     "default_encoding": "UTF-8",
     "default_line_ending": "unix",
     "draw_white_space": ["selection"],
@@ -51,70 +53,39 @@
     "fade_fold_buttons": true,
     "file_tab_style": "rounded",
     "fold_buttons": true,
+    "font_options": ["gdi","no_bold"],
+    "font_size": 13,
     "hide_new_tab_button": true,
-    "hide_tab_scrolling_buttons": true,
+    "hide_tab_scrolling_buttons": false,
     "highlight_line": true,
     "highlight_modified_tabs": true,
-    "ignored_packages": ["Vintage"],
+    "index_files": true,
     "line_numbers": true,
     "line_padding_bottom": 1,
     "line_padding_top": 1,
     "margin": -15,
-    "overlay_scroll_bars": "disabled",
+    "overlay_scroll_bars": "enable",
     "reload_file_on_change": true,
     "show_encoding": true,
     "show_indentation": true,
     "show_line_endings": true,
     "show_syntax": true,
-    "show_tab_close_buttons": false,
-    "tab_size": 2,
+    "show_tab_close_buttons": true,
     "theme": "Default Dark.sublime-theme",
     "translate_tabs_to_spaces": true,
     "trim_trailing_white_space_on_save": true,
     "word_wrap": true,
-    "close_find_after_find_all": false,
-    "close_find_after_replace_all": false,
-    "font_options": ["gdi","no_bold"],
-    /*"font_face": "Microsoft YaHei UI",*/
-    /*"font_face": "Microsoft YaHei UI Light",*/
     /*"font_face": "Cascadia Code PL Light",*/
     /*"font_face": "Cascadia Mono PL Light",*/
     /*"font_face": "JetBrains Mono",*/
-    /*"font_face": "新宋体",*/
+    /*"font_face": "Microsoft YaHei UI Light",*/
+    /*"font_face": "Microsoft YaHei UI",*/
     /*"font_face": "NSimSun",*/
-    /*"font_face": "YaHeiMono",*/
-    /*"font_face": "星汉等宽 CN",*/
-    /*"font_face": "Sarasa Mono SC Extralight",*/
-    "font_face": "等距更纱黑体 SC Xlight",
-    /*"font_face": "等距更纱黑体 SC Extralight",*/
-    /*"font_face": "等距更纱黑体 SC Extralight Italic",*/
-    /*"font_face": "等距更纱黑体 SC",*/
-    /*"font_face": "等距更纱黑体 SC Xlight",*/
-    "font_size": 14,
-}
-```
-
-```json
-{
-	"ignored_packages": [
-		"Emmet",
-		"LSP",
-		"Pretty JSON",
-		"SideBarEnhancements",
+    /*"font_face": "新宋体",*/
+    "ignored_packages":
+    [
 		"Vintage",
-	],
-	"trim_trailing_white_space_on_save": true,
-	"word_wrap": true,
-	"default_line_ending": "unix",
-	"highlight_line": true,
-	"caret_extra_top": 0,
-	"caret_extra_bottom": 0,
-	"caret_extra_width": 1,
-	"caret_style": "smooth",
-	"margin": -15,
-	"translate_tabs_to_spaces": true,
-	"theme": "Adaptive.sublime-theme",
-	"index_files": true,
+    ],
 }
 ```
 
@@ -122,29 +93,30 @@
 
 ```json
 [
-    { "keys": ["alt+/"], "command": "auto_complete"},
-    { "keys": ["ctrl+i"], "command": "reindent"},
-    { "keys": ["alt+up"], "command": "swap_line_up"},
-    { "keys": ["alt+down"], "command": "swap_line_down"},
-    { "keys": ["ctrl+alt+up"], "command": "duplicate_line"},
-    { "keys": ["ctrl+alt+down"], "command": "duplicate_line"},
-    { "keys": ["ctrl+d"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete Line.sublime-macro"} },
-    { "keys": ["ctrl+l"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },
-    { "keys": ["ctrl+k"], "command": "find_under_expand_skip"},
+    { "keys": ["alt+l"], "command": "lower_case" },
+    { "keys": ["alt+u"], "command": "upper_case" },
     { "keys": ["ctrl+shift+x"], "command": "swap_case" },
-    { "keys": ["shift+enter"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line.sublime-macro"} },
-    { "keys": ["alt+\\"], "command": "move_to", "args": {"to": "brackets"} },
-    { "keys": ["ctrl+o"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"} },
-    { "keys": ["ctrl+shift+r"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true } },
-    { "keys": ["alt+f"], "command": "show_panel", "args": {"panel": "find_in_files"} },
-    { "keys": ["ctrl+k"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false } },
-    { "keys": ["ctrl+shift+k"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": true } },
-    { "keys": ["alt+["], "command": "swap_brackets"},
-    { "keys": ["alt+]"], "command": "wrap_brackets"},
-    { "keys": ["ctrl+shift+f"], "command": "js_format"},
-    { "keys": ["shift+up"], "command": "select_lines", "args": {"forward": false} },
-    { "keys": ["shift+down"], "command": "select_lines", "args": {"forward": true} },
-    { "keys": ["alt+s"], "command": "toggle_side_bar" }
+    { "keys": ["alt+/"], "command": "auto_complete" },
+    { "keys": ["alt+["], "command": "swap_brackets" },
+    { "keys": ["alt+]"], "command": "wrap_brackets" },
+    { "keys": ["alt+down"], "command": "swap_line_down" },
+    { "keys": ["alt+f"], "command": "show_panel", "args": { "panel": "find_in_files" } },
+    { "keys": ["alt+m"], "command": "toggle_camel_case_word_selection" },
+    { "keys": ["alt+s"], "command": "toggle_side_bar" },
+    { "keys": ["alt+t"], "command": "capitalize_selection" },
+    { "keys": ["alt+up"], "command": "swap_line_up" },
+    { "keys": ["alt+w"], "command": "toggle_setting", "args": { "setting": "word_wrap" } },
+    { "keys": ["ctrl+alt+down"], "command": "duplicate_line" },
+    { "keys": ["ctrl+d"], "command": "run_macro_file", "args": { "file": "Packages/Default/Delete Line.sublime-macro" } },
+    { "keys": ["ctrl+i"], "command": "reindent" },
+    { "keys": ["ctrl+j"], "command": "join_lines" },
+    { "keys": ["ctrl+k"], "command": "find_under_expand_skip" },
+    { "keys": ["ctrl+l"], "command": "show_overlay", "args": { "overlay": "goto", "text": ":" } },
+    { "keys": ["ctrl+o"], "command": "show_overlay", "args": { "overlay": "goto", "text": "@" } },
+    { "keys": ["ctrl+shift+r"], "command": "show_overlay", "args": { "overlay": "goto", "show_files": true } },
+    { "keys": ["shift+down"], "command": "select_lines", "args": { "forward": true } },
+    { "keys": ["shift+enter"], "command": "run_macro_file", "args": { "file": "Packages/Default/Add Line.sublime-macro" } },
+    { "keys": ["shift+up"], "command": "select_lines", "args": { "forward": false } },
 ]
 ```
 
@@ -154,9 +126,11 @@
 
 全部中文的情况下，很有可能半行就自动换行了，目前没有找到解决方案
 
+sublime怎么实现按照字符换行而不是按照单词换行
 
 
-# 大眼仔说明
+
+# 大眼仔
 
 > http://www.dayanzai.me/sublime-text.html
 
@@ -385,13 +359,15 @@ http://www.sublimetext.com/blog/articles/sublime-text-4
 [点击下载](https://url89.ctfile.com/f/3965089-1339868509-c7f386?p=536766)（提取码：536766）
 [点击下载](https://pan.baidu.com/s/1tx2dbMpXzbNnr9QqTcZaaw?pwd=si4q)（提取码：si4q）
 
-# ypojie
+# 亿破姐
 
 > https://www.ypojie.com/3138.html
 
 [代码](https://www.ypojie.com/tag/代码)[编辑器](https://www.ypojie.com/tag/编辑器) [Sublime Text](https://www.ypojie.com/3138.html) 中文汉化版绿色正式版由亿破姐收集特意分享给学习代码的朋友使用， Sublime Text 官方正版太贵了亿破姐这种刚刚学习PHP代码的人来说简直负担不起，亿破姐收集的此 Sublime Text 使用官方版进行修改汉化、集成正版密钥默认已注册河蟹，去自动检测升级提示，整合Git、DocBlockr、MarkdownPreview、ColorPicker、AllAutocomplete、GBK插件支持简体中文等等插件，有钱的程序员可以支持正版。
 
 Sublime Text 是个代码编辑器，也是HTML和散文先进的[文本编辑](https://www.ypojie.com/tag/文本编辑)器。Sublime Text 具有漂亮的用户界面和强大的功能，例如代码缩略图，Python的插件，代码段等。还可自定义键绑定，菜单和工具栏。Sublime Text 的主要功能包括：拼写检查，书签，完整的 Python API ， Goto 功能，即时项目切换，多选择，多窗口等等。Sublime Text 是一个跨平台的编辑器，同时支持Windows、Linux、Mac OS X等操作系统。
+
+## 特性说明
 
 转到任何东西
 使用Goto Anything只需几个按键即可打开文件，并立即跳转到符号，线条或文字。
@@ -444,7 +420,7 @@ Sublime Text可用于Mac，Windows和Linux。无论您使用何种操作系统�
 
 Sublime Text使用自定义UI工具包，针对速度和美观进行了优化，同时利用每个平台上的本地功能。
 
-**修改说明**
+## 修改说明
 
 Sublime Text 3 官方版进行完美汉化中文；集成Sublime Text正版密钥默认已注册完美正式版；
 
