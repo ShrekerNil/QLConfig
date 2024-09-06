@@ -831,6 +831,56 @@ powercfg /batteryreport
 
 ### Everything
 
+#### 管理员权限启动无UAC
+
+实现有两种方式：
+
+1. 普通权限开机启动 & 添加系统服务，Everything的设置中就能实现
+
+   - 详见：https://www.everythingsearch.cn/513.html
+
+2. 使用计划任务高级设置
+
+   - 在创建计划任务时，可以设置特定的选项来避免UAC提示。具体来说，可以在创建计划任务时选择“不管用户是否登录都要运行”和“使用最高权限运行”。这样设置后，计划任务在执行时不会触发UAC提示，因为它是以系统账户的权限运行的，而不是当前登录用户的权限。
+
+     这种方法的缺点是，它可能需要您在计划任务的属性中进行一些高级配置，具体步骤如下：
+
+     - 打开“任务计划程序”。
+     - 创建新任务或编辑现有任务。
+     - 在“常规”选项卡中，确保勾选“不管用户是否登录都要运行”。
+     - 转到“条件”选项卡，取消勾选“仅当用户登录时才启动”。
+     - 在“操作”选项卡中，选择“启动程序”，然后选择Everything的可执行文件。
+     - 点击“属性”，在“高级”选项卡中勾选“使用最高权限运行”。
+
+   - 配置成脚本：
+
+     ```cmd
+     @echo off
+     setlocal
+     
+     :: Everything 的路径，根据实际情况修改
+     set "EVERYTHING_PATH=D:\Programs\Tools\Everything\Everything.exe"
+     
+     :: 创建计划任务
+     schtasks /create /tn "EverythingScheduler" /tr "%EVERYTHING_PATH%" /sc onlogon /ru "SYSTEM" /f
+     
+     :: 输出结果
+     if %ERRORLEVEL% equ 0 (
+          echo Everything 已设置为开机启动。
+     ) else (
+          echo 设置开机启动失败，错误代码：%ERRORLEVEL%。
+     )
+     
+     endlocal
+     ```
+
+     - `/create`: 这个参数告诉 `schtasks` 命令创建一个新的计划任务。
+     - `/tn "EverythingScheduler"`: `/tn` 参数后面跟着的是计划任务的名称。在这个例子中，任务的名称被设置为 "EverythingScheduler"。这个名称是您自定义的，用于标识计划任务。
+     - `/tr "%EVERYTHING_PATH%"`: `/tr` 参数后面跟着的是要运行的任务（在这个例子中是Everything程序）。`%EVERYTHING_PATH%` 是一个环境变量，它应该在批处理文件的开始部分被定义，指向Everything的可执行文件路径。例如，如果Everything位于 `D:\Programs\Tools\Everything\Everything.exe`，则该变量应该被设置为这个路径。
+     - `/sc onlogon`: `/sc` 参数定义了计划任务的触发条件。`onlogon` 表示任务将在每次用户登录时触发。
+     - `/ru "SYSTEM"`: `/ru` 参数后面跟着的是要以哪个用户身份运行任务。`"SYSTEM"` 表示任务将以系统账户身份运行。使用系统账户运行任务可以避免UAC（用户账户控制）提示，因为系统账户具有更高的权限。
+     - `/f`: `/f` 参数用于强制创建任务，即使存在同名的任务也不会提示确认。
+
 #### 使用小技巧
 
 > 在菜单的帮助中有所有的使用手册
@@ -848,6 +898,171 @@ powercfg /batteryreport
 5. 限制文件大小：
    1. 大于500MB：`<关键词> size:>500mb`
    2. 在100~500MB之间：`<关键词> size:100mb~500mb`
+
+#### Search Syntax
+
+```
+Operators:
+	space	AND
+	|	OR
+	!	NOT
+	< >	Grouping
+	" "	Search for an exact phrase.
+
+Wildcards:
+	*	Matches zero or more characters.
+	?	Matches one character.
+
+Macros:
+	quot:	Literal double quote (")
+	apos:	Literal apostrophe (')
+	amp:	Literal ampersand (&)
+	lt:	Literal less than (<)
+	gt:	Literal greater than (>)
+	#<n>:	Literal unicode character <n> in decimal.
+	#x<n>:	Literal unicode character <n> in hexadecimal.
+	audio:	Search for audio files.
+	zip:	Search for compressed files.
+	doc:	Search for document files.
+	exe:	Search for executable files.
+	pic:	Search for picture files.
+	video:	Search for video files.
+
+Modifiers:
+	ascii:	Enable fast ASCII case comparisons.
+	case:	Match case.
+	diacritics:	Match diacritical marks.
+	endwith:	Filenames (including extension) ending with text.
+	file:	Match files only.
+	folder:	Match folders only.
+	path:	Match path and file name.
+	regex:	Enable regex.
+	startwith:	Search for filenames starting with text.
+	utf8:	Disable fast ASCII case comparisons.
+	wfn:	Match the whole filename.
+	wholefilename:	Match the whole filename.
+	wholeword:	Match whole words only.
+	wildcards:	Enable wildcards.
+	ww:	Match whole words only.
+	Disable a modifier with the no prefix.
+
+Functions:
+	album:<text>	Search media for album metadata.
+	ansicontent:<text>	Search ANSI file content for text.
+	artist:<text>	Search media for artist metadata.
+	attrib:<attributes>	Search for files and folders with the specified file attributes.
+	attribdupe:	Find files and folders with the same attributes.
+	attributes:<attributes>	Search for files and folders with the specified file attributes.
+	bitdepth:<bitdepth>	Find images with the specified bits per pixel.
+	child:<filename>	Search for folders that contain a child with a matching filename.
+	childcount:<count>	Search for folders that contain the specified number of subfolders and files.
+	childfilecount:<count>	Search for folders that contain the specified number of files.
+	childfoldercount:<n>	Search for folders that contain the specified number of subfolders.
+	comment:<text>	Search media for comment metadata.
+	content:<text>	Search file content for text.
+	count:<max>	Limit the number of results to max.
+	dateaccessed:<date>	Search for files and folders with the specified date accessed.
+	datecreated:<date>	Search for files and folders with the specified date created.
+	datemodified:<date>	Search for files and folders with the specified date modified.
+	daterun:<date>	Search for files and folders with the specified date run.
+	da:<date>	Search for files and folders with the specified date accessed.
+	dadupe:	Find files and folders with the same date accessed.
+	dc:<date>	Search for files and folders with the specified date created.
+	dcdupe:	Find files and folders with the same date created.
+	dimensions:<w>X<h>	Find images with the specified width and height.
+	dm:<date>	Search for files and folders with the specified date modified.
+	dmdupe:	Find files and folders with the same date modified.
+	dr:<date>	Search for files and folders with the specified date run.
+	dupe:	Search for duplicated filenames.
+	empty:	Search for empty folders.
+	ext:<ext1;ext2;...>	Search for files with a matching extension in the specified semicolon delimited extension list.
+	filelist:<fn1|fn2|...>	Search for a list of file names in the specified pipe (|) delimited file list.
+	filelistfilename:<name>	Search for files and folders belonging to the file list filename.
+	frn:<frn>	Search for files and folders with the specified File Reference Number.
+	fsi:<index>	Search for files and folders in the specified zero based internal file system index.
+	genre:<text>	Search media for genre metadata.
+	height:<height>	Find images with the specified height in pixels.
+	infolder:<path>	Search for files and folders in the specified path, excluding subfolders.
+	len:<length>	Search for files and folders that match the specified filename length.
+	namepartdupe:	Search for files and folders with the same name part.
+	orientation:<type>	Search for images with the specified orientation (landscape or portrait).
+	parent:<path>	Search for files and folders in the specified path, excluding subfolders.
+	parents:<count>	Search for files and folders with the specified number of parent folders.
+	rc:<date>	Search for files and folders with the specified recently changed date.
+	recentchange:<date>	Search for files and folders with the specified recently changed date.
+	root:	Search for files and folders with no parent folders.
+	runcount:<count>	Search for files and folders with the specified run count.
+	shell:<name>	Search for a known shell folder name, including subfolders and files.
+	size:<size>	Search for files with the specified size in bytes.
+	sizedupe:	Search for duplicated sizes.
+	title:<text>	Search media for title metadata.
+	track:<number>	Find media files with the specified track number.
+	type:<type>	Search for files and folders with the specified type.
+	utf16content:<text>	Search UTF-16 file content for text.
+	utf16becontent:<text>	Search UTF-16 Big Endian file content for text.
+	utf8content:<text>	Search UTF-8 file content for text.
+	width:<width>	Find images with the specified width in pixels.
+
+Function Syntax:
+	function:value	Equal to value.
+	function:<=value	Less than or equal to value.
+	function:<value	Less than value.
+	function:=value	Equal to value.
+	function:>value	Greater than value.
+	function:>=value	Greater than or equal to value.
+	function:start..end	Is in the range of values from start to end.
+	function:start-end	Is in the range of values from start to end.
+
+Size Syntax:
+	size[kb|mb|gb]
+
+Size Constants:
+	empty
+	tiny	0 KB < size <= 10 KB
+	small	10 KB < size <= 100 KB
+	medium	100 KB < size <= 1 MB
+	large	1 MB < size <= 16 MB
+	huge	16 MB < size <= 128 MB
+	gigantic	size > 128 MB
+	unknown
+
+Date Syntax:
+	year
+	month/year or year/month depending on locale settings
+	day/month/year, month/day/year or year/month/day depending on locale settings
+	YYYY[-MM[-DD[Thh[:mm[:ss[.sss]]]]]]
+	YYYYMM[DD[Thh[mm[ss[.sss]]]]]
+
+Date Constants:
+	today
+	yesterday
+	tomorrow
+	<last|past|prev|current|this|coming|next><year|month|week>
+	<last|past|prev|coming|next><x><years|months|weeks|days|hours|minutes|mins|seconds|secs>
+	january|february|march|april|may|june|july|august|september|october|november|december
+	jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec
+	sunday|monday|tuesday|wednesday|thursday|friday|saturday
+	sun|mon|tue|wed|thu|fri|sat
+	unknown
+
+Attribute Constants:
+	A	Archive
+	C	Compressed
+	D	Directory
+	E	Encrypted
+	H	Hidden
+	I	Not content indexed
+	L	Reparse point
+	N	Normal
+	O	Offline
+	P	Sparse file
+	R	Read only
+	S	System
+	T	Temporary
+	V	Device
+```
+
+
 
 ### Wox
 
@@ -961,6 +1176,10 @@ powercfg /batteryreport
 ### 0.5等宽字体
 
 > 【Noto Sans Mono: 最佳编程字体】https://www.bilibili.com/video/BV19r4y1W74d?vd_source=9ea3ddc4cd6185ce0bf48843c9cc3e78
+>
+> **无意中发现：Microsoft Yahei 与 Consolas 在Sublime上完美契合 0.5 等宽**：
+>
+> ![image-20240906224912825](Win10.assets/image-20240906224912825.png)
 
 为了使得代码显示的更为整洁，出现了一种0.5等宽字体，即两个英文字幕的宽度正好是一个汉字的宽度
 
@@ -990,7 +1209,7 @@ powercfg /batteryreport
 
 ## Win10字体修改工具
 
-> [Tatsu-syo/noMeiryoUI: No!! MeiryoUI is Windows system font setting tool on Windows 8.1/10/11. (github.com)](https://github.com/Tatsu-syo/noMeiryoUI)
+> [Tatsu-syo/noMeiryoUI: No!! MeiryoUI is Windows system font setting tool on Windows 8.1/10/11](https://github.com/Tatsu-syo/noMeiryoUI)
 
 
 
