@@ -834,6 +834,8 @@ powercfg /batteryreport
 #### 使用小技巧
 
 > 在菜单的帮助中有所有的使用手册
+>
+> 开机启动没有UAC的技巧：普通权限开机启动 & 添加系统服务，详见：https://www.everythingsearch.cn/513.html
 
 1. 搜索文件夹内存：`<路径> <关键词>`
 2. 逻辑搜索，与或非
