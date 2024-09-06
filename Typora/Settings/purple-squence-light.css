@@ -248,14 +248,10 @@ table tr:nth-child(2n),thead {
     color: inherit;
 }
 
-图片靠左显示
-p .md-image:only-child {
-    width: auto;
-    text-align: left;
-}
-
-img {
-    margin: 0;
+/*图片靠左显示*/
+p .md-image img {
+    margin: 0 !important;
+    display: inline-flex;
     border: solid 1px #dddddd;
     border-radius: 8px;
 }
@@ -265,6 +261,7 @@ img[alt|="shadow"] {
   box-shadow: var(--shadow);
 }
 */
+
 #write a.md-toc-inner {
     line-height: 1.6;
     white-space: pre-line;
