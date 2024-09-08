@@ -53,8 +53,12 @@ Open User Settings → Breadcrumbs → ✔ Enable/disable navigation breadcrumbs
 
 ## 好用插件
 
-- Settings Sync
-- Live Server
+| 插件              | 作用                 | 备注                                                   |
+| ----------------- | -------------------- | ------------------------------------------------------ |
+| Live Server       | 前端开发本地服务器   |                                                        |
+| Settings Sync     | 配置同步             | 现在一般都不用这个了，直接在VSCode中Github登陆即可同步 |
+| Path Intellisense | 代码中资源的路径提示 |                                                        |
+| Vue - Official    | Vue 代码高亮         |                                                        |
 
 ## Gists
 

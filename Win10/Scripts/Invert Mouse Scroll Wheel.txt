@@ -1,5 +1,0 @@
-https://www.michaelcrump.net/invert-mouse-bootcamp-win10/
-
-If you’re using Windows 10 and would like the scroll wheel inverted, then open up PowerShell as an admin and run the following command:
-
-Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Enum\HID\*\*\Device` Parameters FlipFlopWheel -EA 0 | ForEach-Object { Set-ItemProperty $_.PSPath FlipFlopWheel 1 }

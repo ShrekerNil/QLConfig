@@ -510,21 +510,25 @@ sc.exe delete "<service-name>"
 | PowerShell 调用 CMD | sc.exe start "<service-name>"        | sc.exe stop "<service-name>"       | sc.exe delete "<service-name>"                               |
 | PowerShell          | Start-Service -name "<service-name>" | Stop-Service-name "<service-name>" | Remove-Service-name "<service-name>" <br/>(慎用！仅在 PS v6 及以上有效) |
 
-# 装机动作
+# 安装Win10
+
+> 关于英文系统中文扭曲的问题，问题的关键是：系统默认字体不支持中文，所以要安装一个支持文中的默认字体，noMeiryoUI就可以实现
 
 ## 激活
 
-> 工具激活
+> KMS工具激活
 >
 > yishimei.cn
 
 > 手动激活
 >
+> ```
 > slmgr /ipk <key>
->
+> 
 > slmgr /skms skms.03k.org
->
+> 
 > slmgr /ato
+> ```
 
 ## 检查驱动
 
@@ -591,7 +595,7 @@ sc.exe delete "<service-name>"
      You may need to refresh the registry after the import to see the changes. This usually involves a reboot but try adding the following as the last line in your batch file instead. RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
      ```
    
-      - 可设置的项目(cmd运行`reg query "HKCU\Control Panel\International`可查看)：
+      - 可设置的项目(cmd运行`reg query "HKCU\Control Panel\International"`可查看)：
    
         | Item          | Type   | Example    |
         | ------------- | ------ | ---------- |
@@ -602,6 +606,58 @@ sc.exe delete "<service-name>"
         | sShortDate    | REG_SZ | yyyy/MM/dd |
         | sTimeFormat   | REG_SZ | HH:mm:ss   |
         | sShortTime    | REG_SZ | HH:mm      |
+        
+        ```sh
+        C:\Users\Shreker>reg query "HKCU\Control Panel\International"
+        
+        HKEY_CURRENT_USER\Control Panel\International
+            Locale    REG_SZ    00000409
+            LocaleName    REG_SZ    en-US
+            s1159    REG_SZ    AM
+            s2359    REG_SZ    PM
+            sCurrency    REG_SZ    $
+            sDate    REG_SZ    /
+            sDecimal    REG_SZ    .
+            sGrouping    REG_SZ    3;0
+            sLanguage    REG_SZ    ENU
+            sList    REG_SZ    ,
+            sLongDate    REG_SZ    yyyy/MM/dd ddd
+            sMonDecimalSep    REG_SZ    .
+            sMonGrouping    REG_SZ    3;0
+            sMonThousandSep    REG_SZ    ,
+            sNativeDigits    REG_SZ    0123456789
+            sNegativeSign    REG_SZ    -
+            sPositiveSign    REG_SZ
+            sShortDate    REG_SZ    yyyy/MM/dd ddd
+            sThousand    REG_SZ    ,
+            sTime    REG_SZ    :
+            sTimeFormat    REG_SZ    HH:mm:ss
+            sShortTime    REG_SZ    HH:mm
+            sYearMonth    REG_SZ    MMMM yyyy
+            iCalendarType    REG_SZ    1
+            iCountry    REG_SZ    1
+            iCurrDigits    REG_SZ    2
+            iCurrency    REG_SZ    0
+            iDate    REG_SZ    2
+            iDigits    REG_SZ    2
+            NumShape    REG_SZ    1
+            iFirstDayOfWeek    REG_SZ    6
+            iFirstWeekOfYear    REG_SZ    0
+            iLZero    REG_SZ    1
+            iMeasure    REG_SZ    1
+            iNegCurr    REG_SZ    0
+            iNegNumber    REG_SZ    1
+            iPaperSize    REG_SZ    1
+            iTime    REG_SZ    1
+            iTimePrefix    REG_SZ    0
+            iTLZero    REG_SZ    1
+        
+        HKEY_CURRENT_USER\Control Panel\International\Geo
+        HKEY_CURRENT_USER\Control Panel\International\LanguageComponentsAvailable
+        HKEY_CURRENT_USER\Control Panel\International\User Profile
+        HKEY_CURRENT_USER\Control Panel\International\User Profile System Backup
+        HKEY_CURRENT_USER\Control Panel\International\🌎🌏🌍
+        ```
    
 
 ### 设置第二语言
@@ -664,6 +720,28 @@ doskey ll=ls -l
 | 视频   | D:\QLMedias\Videos          |
 | 文档   | D:\Documents                |
 | 下载   | D:\Downloads                |
+
+## 英文Win10字体问题
+
+在安装英文操作系统后遇到的问题：
+
+1. 中文字体扭曲变形
+   - 解决办法：
+     - 到系统中添加中文语言，下载基础语言包
+     - 修改操作系统的默认字体 noMeiryoUI
+     - 重启系统
+2. Sublime找不到完美的0.5等宽
+   - 之前装的中文系统，然后设置的Locale为简体中文，一切正常
+   - 安装英文系统，Locale没有修改，造成中文非常扭曲
+   - 问题：
+     - Locale为中文的时候，Sublime没有问题，新宋体和Consolas搭配完美，但是Locale为英文的时候，中文扭曲变形
+   - 怀疑：
+     - Sublime默认使用的**新宋体**作为中文的默认字体，修改Locale为英文之后，**新宋体**字体的名称就变成了**NSimSun**，导致找不到**新宋体**字体了
+   - 解决方案：
+     - 暂时无解，只能找个中英比较完美的字体
+       - Sarasa这个字体存在中文间距较大的问题
+       - Jetbrans Mono是个纯英文字体
+     - Sublime怎么配置多个fallback字体
 
 ## 其他
 
@@ -1177,7 +1255,7 @@ Attribute Constants:
 
 > 【Noto Sans Mono: 最佳编程字体】https://www.bilibili.com/video/BV19r4y1W74d?vd_source=9ea3ddc4cd6185ce0bf48843c9cc3e78
 >
-> **无意中发现：Microsoft Yahei 与 Consolas 在Sublime上完美契合 0.5 等宽**：
+> **在Sublime中研究等宽字体的时候，无意中发现：NSimSun(新宋体) 与 Consolas 在Sublime上完美契合 0.5 等宽**：
 >
 > ![image-20240906224912825](Win10.assets/image-20240906224912825.png)
 

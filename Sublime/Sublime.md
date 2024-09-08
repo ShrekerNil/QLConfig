@@ -130,6 +130,14 @@ sublime怎么实现按照字符换行而不是按照单词换行
 
 
 
+# Sublime 插件
+
+## 常见插件
+
+1. Package Control，开源地址：https://github.com/wbond/package_control
+2. FileHeader，开源地址：https://github.com/shiyanhui/FileHeader
+3. SublimePrettyJson：开源地址：https://github.com/dzhibas/SublimePrettyJson
+
 # 大眼仔
 
 > http://www.dayanzai.me/sublime-text.html
