@@ -1,0 +1,222 @@
+https://blog.csdn.net/wyg1995/article/details/134313843
+https://blog.csdn.net/weixin_47962813/article/details/134673039
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'mysql5744';
+ALTER USER 'root'@'localhost' PASSWORD EXPIRE NEVER;
+FLUSH PRIVILEGES;
+USE mysql;
+UPDATE user SET host = '%' WHERE user = 'root';
+FLUSH PRIVILEGES;
+exit;
+
+[mysqld]
+bind-address=0.0.0.0
+port=3306
+basedir=/usr/local/mysql
+datadir=/data/mysql
+log-error=/data/mysql/mysql_err.log
+pid-file=/data/mysql/mysql.pid
+max_connections=200
+max_connect_errors=10
+socket=/tmp/mysql.sock
+character-set-server=utf8mb4
+default-storage-engine=INNODB
+default_authentication_plugin=mysql_native_password
+explicit_defaults_for_timestamp=true
+[mysql]
+default-character-set=utf8mb4
+[client]
+port=3306
+default-character-set=utf8mb4
+
+=============================================================================
+[root@localhost ~]# ping www.baidu.com
+PING www.a.shifen.com (110.242.68.4) 56(84) bytes of data.
+64 bytes from 110.242.68.4 (110.242.68.4): icmp_seq=1 ttl=54 time=28.6 ms
+64 bytes from 110.242.68.4 (110.242.68.4): icmp_seq=2 ttl=54 time=28.5 ms
+64 bytes from 110.242.68.4 (110.242.68.4): icmp_seq=3 ttl=54 time=32.2 ms
+^C
+--- www.a.shifen.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 28.588/29.852/32.295/1.738 ms
+[root@localhost ~]# mkdir packages
+[root@localhost ~]# ll
+total 4
+-rw-------. 1 root root 1330 May 27 05:43 anaconda-ks.cfg
+drwxr-xr-x. 2 root root   56 Sep 19 10:55 packages
+[root@localhost ~]# cd packages/
+[root@localhost packages]# tar -zxf mysql-5.7.44-linux-glibc2.12-x86_64.tar.gz 
+[root@localhost packages]# ll
+total 678504
+drwxr-xr-x. 9 root root       129 Sep 19 10:56 mysql-5.7.44-linux-glibc2.12-x86_64
+-rw-r--r--. 1 root root 694785800 Sep 19 09:21 mysql-5.7.44-linux-glibc2.12-x86_64.tar.gz
+[root@localhost packages]# mv mysql-5.7.44-linux-glibc2.12-x86_64 mysql
+[root@localhost packages]# ll
+total 678504
+drwxr-xr-x. 9 root root       129 Sep 19 10:56 mysql
+-rw-r--r--. 1 root root 694785800 Sep 19 09:21 mysql-5.7.44-linux-glibc2.12-x86_64.tar.gz
+[root@localhost packages]# cp -r ./mysql /usr/local/
+[root@localhost packages]# ll /usr/local/
+total 0
+drwxr-xr-x. 2 root root   6 Apr 11  2018 bin
+drwxr-xr-x. 2 root root   6 Apr 11  2018 etc
+drwxr-xr-x. 2 root root   6 Apr 11  2018 games
+drwxr-xr-x. 2 root root   6 Apr 11  2018 include
+drwxr-xr-x. 2 root root   6 Apr 11  2018 lib
+drwxr-xr-x. 2 root root   6 Apr 11  2018 lib64
+drwxr-xr-x. 2 root root   6 Apr 11  2018 libexec
+drwxr-xr-x. 9 root root 129 Sep 19 10:58 mysql
+drwxr-xr-x. 2 root root   6 Apr 11  2018 sbin
+drwxr-xr-x. 5 root root  49 May 27 05:40 share
+drwxr-xr-x. 2 root root   6 Apr 11  2018 src
+[root@localhost packages]# ll /usr/local/mysql/
+total 272
+drwxr-xr-x.  2 root root   4096 Sep 19 10:57 bin
+drwxr-xr-x.  2 root root     73 Sep 19 10:58 docs
+drwxr-xr-x.  3 root root   4096 Sep 19 10:58 include
+drwxr-xr-x.  5 root root    230 Sep 19 10:58 lib
+-rw-r--r--.  1 root root 260678 Sep 19 10:58 LICENSE
+drwxr-xr-x.  4 root root     30 Sep 19 10:58 man
+-rw-r--r--.  1 root root    566 Sep 19 10:58 README
+drwxr-xr-x. 28 root root   4096 Sep 19 10:58 share
+drwxr-xr-x.  2 root root     90 Sep 19 10:58 support-files
+[root@localhost packages]# groupadd mysql
+[root@localhost packages]# useradd -r -g mysql mysql
+[root@localhost packages]# mkdir -p /data/mysql
+[root@localhost packages]# chown mysql:mysql -R /data/mysql
+[root@localhost packages]# more /etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+# Settings user and group are ignored when systemd is used.
+# If you need to run mysqld under a different user or group,
+# customize your systemd unit file for mariadb according to the
+# instructions in http://fedoraproject.org/wiki/Systemd
+
+[mysqld_safe]
+log-error=/var/log/mariadb/mariadb.log
+pid-file=/var/run/mariadb/mariadb.pid
+
+#
+# include all files from the config directory
+#
+!includedir /etc/my.cnf.d
+
+[root@localhost packages]# mv /etc/my.cnf /etc/my.cnf.bak
+[root@localhost packages]# vi /etc/my.cnf
+[root@localhost packages]# /usr/local/mysql/bin/mysqld --defaults-file=/etc/my.cnf --basedir=/usr/local/mysql/ --datadir=/data/mysql/ --user=mysql --initialize
+[root@localhost packages]# cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
+[root@localhost packages]# service mysql start
+Starting MySQL. SUCCESS! 
+[root@localhost packages]# more /data/mysql/mysql_err.log
+2024-09-19T15:16:25.268460Z 0 [Warning] InnoDB: New log files created, LSN=45790
+2024-09-19T15:16:25.302957Z 0 [Warning] InnoDB: Creating foreign key constraint system tables.
+2024-09-19T15:16:25.364537Z 0 [Warning] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: 22dbc9be-769a-1
+1ef-9133-080027eb2248.
+2024-09-19T15:16:25.367556Z 0 [Warning] Gtid table is not ready to be used. Table 'mysql.gtid_executed' cannot be opened.
+2024-09-19T15:16:26.001455Z 0 [Warning] A deprecated TLS version TLSv1 is enabled. Please use TLSv1.2 or higher.
+2024-09-19T15:16:26.001466Z 0 [Warning] A deprecated TLS version TLSv1.1 is enabled. Please use TLSv1.2 or higher.
+2024-09-19T15:16:26.003571Z 0 [Warning] CA certificate ca.pem is self signed.
+2024-09-19T15:16:26.490346Z 1 [Note] A temporary password is generated for root@localhost: ;1*XkweHAfB;
+2024-09-19T15:16:51.606795Z 0 [Note] --secure-file-priv is set to NULL. Operations related to importing and exporting data are disabled
+2024-09-19T15:16:51.606869Z 0 [Note] /usr/local/mysql/bin/mysqld (mysqld 5.7.44) starting as process 1845 ...
+2024-09-19T15:16:51.609802Z 0 [Note] InnoDB: PUNCH HOLE support available
+2024-09-19T15:16:51.609818Z 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2024-09-19T15:16:51.609820Z 0 [Note] InnoDB: Uses event mutexes
+2024-09-19T15:16:51.609822Z 0 [Note] InnoDB: GCC builtin __sync_synchronize() is used for memory barrier
+2024-09-19T15:16:51.609824Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.13
+2024-09-19T15:16:51.609826Z 0 [Note] InnoDB: Using Linux native AIO
+2024-09-19T15:16:51.609994Z 0 [Note] InnoDB: Number of pools: 1
+2024-09-19T15:16:51.610053Z 0 [Note] InnoDB: Using CPU crc32 instructions
+2024-09-19T15:16:51.611042Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+2024-09-19T15:16:51.615430Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2024-09-19T15:16:51.616409Z 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+2024-09-19T15:16:51.627967Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2024-09-19T15:16:51.640569Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2024-09-19T15:16:51.640675Z 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2024-09-19T15:16:51.657571Z 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2024-09-19T15:16:51.658061Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2024-09-19T15:16:51.658067Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2024-09-19T15:16:51.658191Z 0 [Note] InnoDB: Waiting for purge to start
+2024-09-19T15:16:51.708502Z 0 [Note] InnoDB: 5.7.44 started; log sequence number 2768291
+2024-09-19T15:16:51.708677Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2024-09-19T15:16:51.711855Z 0 [Note] Found ca.pem, server-cert.pem and server-key.pem in data directory. Trying to enable SSL support using them.
+2024-09-19T15:16:51.711865Z 0 [Note] Skipping generation of SSL certificates as certificate files are present in data directory.
+2024-09-19T15:16:51.711868Z 0 [Warning] A deprecated TLS version TLSv1 is enabled. Please use TLSv1.2 or higher.
+2024-09-19T15:16:51.711870Z 0 [Warning] A deprecated TLS version TLSv1.1 is enabled. Please use TLSv1.2 or higher.
+2024-09-19T15:16:51.715335Z 0 [Warning] CA certificate ca.pem is self signed.
+2024-09-19T15:16:51.715373Z 0 [Note] Skipping generation of RSA key pair as key files are present in data directory.
+2024-09-19T15:16:51.716144Z 0 [Note] Server hostname (bind-address): '0.0.0.0'; port: 3306
+2024-09-19T15:16:51.716187Z 0 [Note]   - '0.0.0.0' resolves to '0.0.0.0';
+2024-09-19T15:16:51.716803Z 0 [Note] Server socket created on IP: '0.0.0.0'.
+2024-09-19T15:16:51.719417Z 0 [Note] InnoDB: Loading buffer pool(s) from /data/mysql/ib_buffer_pool
+2024-09-19T15:16:51.720381Z 0 [Note] InnoDB: Buffer pool(s) load completed at 240919 11:16:51
+2024-09-19T15:16:51.724955Z 0 [Note] Event Scheduler: Loaded 0 events
+2024-09-19T15:16:51.725028Z 0 [Note] /usr/local/mysql/bin/mysqld: ready for connections.
+Version: '5.7.44'  socket: '/tmp/mysql.sock'  port: 3306  MySQL Community Server (GPL)
+[root@localhost packages]# cd /usr/local/mysql/bin/
+[root@localhost bin]# mysql -u root -p
+-bash: mysql: command not found
+[root@localhost bin]# ./mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.44
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SET PASSWORD = PASSWORD("mysql5744");
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> ALTER USER 'root'@'localhost' PASSWORD EXPIRE NEVER;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> use mysql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> update user set host = '%' where user = 'root';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update mysql.user set authentication_string=password('mysql5744') where user='root';
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 1
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> exit;
+Bye
+[root@localhost bin]# ln -s /usr/local/mysql/bin/mysql /usr/bin
+[root@localhost bin]# mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.7.44 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> exit;
+Bye
