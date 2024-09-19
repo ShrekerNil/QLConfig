@@ -30,6 +30,72 @@ port=3306
 default-character-set=utf8mb4
 
 =============================================================================
+
+https://blog.csdn.net/wyg1995/article/details/134313843
+https://blog.csdn.net/weixin_47962813/article/details/134673039
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'mysql5744';
+ALTER USER 'root'@'localhost' PASSWORD EXPIRE NEVER;
+FLUSH PRIVILEGES;
+USE mysql;
+UPDATE user SET host = '%' WHERE user = 'root';
+FLUSH PRIVILEGES;
+exit;
+
+[mysqld]
+bind-address=0.0.0.0
+port=3306
+basedir=/usr/local/mysql
+datadir=/data/mysql
+log-error=/data/mysql/mysql_err.log
+pid-file=/data/mysql/mysql.pid
+max_connections=200
+max_connect_errors=10
+socket=/tmp/mysql.sock
+character-set-server=utf8mb4
+default-storage-engine=INNODB
+default_authentication_plugin=mysql_native_password
+explicit_defaults_for_timestamp=true
+[mysql]
+default-character-set=utf8mb4
+[client]
+port=3306
+default-character-set=utf8mb4
+
+=============================================================================
+[root@localhost ~]# mkdir packages
+[root@localhost ~]# cd packages/
+[root@localhost packages]# tar -zxf mysql-5.7.44-linux-glibc2.12-x86_64.tar.gz
+[root@localhost packages]# mv mysql-5.7.44-linux-glibc2.12-x86_64 mysql
+[root@localhost packages]# cp -r ./mysql /usr/local/
+[root@localhost packages]# groupadd mysql
+[root@localhost packages]# useradd -r -g mysql mysql
+[root@localhost packages]# mkdir -p /data/mysql
+[root@localhost packages]# chown mysql:mysql -R /data/mysql
+[root@localhost packages]# mv /etc/my.cnf /etc/my.cnf.bak
+[root@localhost packages]# vi /etc/my.cnf
+[root@localhost packages]# /usr/local/mysql/bin/mysqld --defaults-file=/etc/my.cnf --basedir=/usr/local/mysql/ --datadir=/data/mysql/ --user=mysql --initialize
+[root@localhost packages]# cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
+[root@localhost packages]# service mysql start
+[root@localhost packages]# more /data/mysql/mysql_err.log
+[root@localhost packages]# cd /usr/local/mysql/bin/
+[root@localhost bin]# ./mysql -u root -p
+mysql> SET PASSWORD = PASSWORD("mysql5744");
+mysql> ALTER USER 'root'@'localhost' PASSWORD EXPIRE NEVER;
+mysql> FLUSH PRIVILEGES;
+mysql> use mysql;
+mysql> update user set host = '%' where user = 'root';
+mysql> FLUSH PRIVILEGES;
+mysql> update mysql.user set authentication_string=password('mysql5744') where user='root';
+mysql> flush privileges;
+mysql> exit;
+[root@localhost bin]# ln -s /usr/local/mysql/bin/mysql /usr/bin
+[root@localhost bin]# mysql -u root -p
+mysql> exit;
+
+
+
+=============================================================================
 [root@localhost ~]# ping www.baidu.com
 PING www.a.shifen.com (110.242.68.4) 56(84) bytes of data.
 64 bytes from 110.242.68.4 (110.242.68.4): icmp_seq=1 ttl=54 time=28.6 ms
