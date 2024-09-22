@@ -1140,16 +1140,6 @@ Attribute Constants:
 	V	Device
 ```
 
-
-
-### Wox
-
-### Listary
-
-### uTools
-
-### 火柴(火萤酱)
-
 ### Rubick
 
 - [GitHub - rubickCenter/rubick: 🔧 Electron based open source toolbox, free integration of rich plug-ins. 基于 electron 的开源工具箱，自由集成丰富插件。](https://github.com/rubickCenter/rubick)
@@ -1189,17 +1179,23 @@ Attribute Constants:
 
 但普通用户使用起来可能觉得麻烦，因为你还需要记住一些执行的命令，好在Rubick 支持各种实用的小工具/插件，你也可以把它当作一个万能的工具箱来用。
 
-### 闪电搜索
-
 ### AnyTX
 
 它不是根据文名来查找文件，而是通过文档中的关键词定位获取文件。与Word中的查找功能类似，还可以切换上一处、下一处，使查找更加准确。
 
-### 查找文本
+### 其他
 
-和AnyTX一样，也是一个文本查找与定位工具。软件设置非常细致，可以通过磁盘盘符、文件后缀、名称、内容来精准定位文档。
+Wox、Listary、uTools、火柴(火萤酱)、闪电搜索
 
-借助精细化查找，搜到的文件与关键词也是高度匹配的。
+
+
+## 数据库客户端
+
+### Navicat
+
+### SQLYog
+
+
 
 # 字体汇总
 
