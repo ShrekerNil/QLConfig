@@ -119,33 +119,36 @@ JRebel并非是免费的插件，需要激活之后才可以使用
 
 ## 快捷键
 
-| 类别     | 功能                           | Functions        | 自定义快捷键      | 默认快捷键       |
-| -------- | ------------------------------ | ---------------- | ----------------- | ---------------- |
-| 搜索替换 |                                |                  |                   |                  |
-|          | 全局文件中搜索                 | Find in Files    | Ctrl + H          |                  |
-|          | 全局文件中替换                 | Replace in Files |                   |                  |
-|          | 全项目搜索                     |                  | Ctrl + U          | Shift + Shift    |
-|          |                                |                  |                   |                  |
-|          | 全局文件中替换                 |                  | Alt + H           |                  |
-|          | 当前文件中搜索                 |                  | Ctrl + F          |                  |
-|          | 当前文件中替换                 |                  | Alt + F           |                  |
-|          | 搜索类                         |                  |                   | Ctrl + Shift + T |
-|          | 搜索文件                       |                  |                   | Ctrl + Shift + R |
-|          | 显示类方法列表                 |                  |                   | Ctrl + O         |
-|          | 查找接口实现类                 |                  |                   | Ctrl + T         |
-| 代码追踪 | 代码追踪：向前                 |                  | →                 |                  |
-|          | 代码追踪：向后                 |                  | ←                 |                  |
-| 代码生成 | Domain生成代码                 |                  | Alt + Insert      |                  |
-|          | for循环代码生成                |                  | fori              |                  |
-|          | 代码块包围                     |                  | Ctrl + Alt + T    |                  |
-| 焦点切换 | 焦点切换到 Project View        |                  |                   | Alt + 1          |
-|          | 焦点切换到 Editor              |                  |                   | Esc              |
-| 编辑器   |                                |                  |                   |                  |
-|          | 软换行                         | Soft-Wrap        | Alt + W           |                  |
-| 其他技能 | 方法参数提示                   | Parameter Info   |                   | Ctrl + P         |
-|          | 代码补全                       |                  | Alt + /           |                  |
-|          | 文件夹刷新(Reload From Disk)   |                  | Alt + F5          |                  |
-|          | 项目刷新(Reload All From Disk) |                  | Ctrl + Shift + F5 |                  |
+|   类别   | 功能                           | Functions         | 自定义快捷键       | 默认快捷键       |
+| :------: | ------------------------------ | ----------------- | ------------------ | ---------------- |
+| 搜索替换 |                                |                   |                    |                  |
+|          | 全局文件中搜索                 | Find in Files     | Ctrl + H           |                  |
+|          | 全局文件中替换                 | Replace in Files  |                    |                  |
+|          | 全项目搜索                     |                   | Ctrl + U           | Shift + Shift    |
+|          |                                |                   |                    |                  |
+|          | 全局文件中替换                 |                   | Alt + H            |                  |
+|          | 当前文件中搜索                 |                   | Ctrl + F           |                  |
+|          | 当前文件中替换                 |                   | Alt + F            |                  |
+|          | 搜索类                         |                   |                    | Ctrl + Shift + T |
+|          | 搜索文件                       |                   |                    | Ctrl + Shift + R |
+|          | 显示类方法列表                 |                   |                    | Ctrl + O         |
+|          | 查找接口实现类                 |                   |                    | Ctrl + T         |
+| 代码追踪 |                                |                   |                    |                  |
+|          | 代码追踪：向前                 |                   | →                  |                  |
+|          | 代码追踪：向后                 |                   | ←                  |                  |
+| 代码生成 | Domain生成代码                 |                   | Alt + Insert       |                  |
+|          | for循环代码生成                |                   | fori               |                  |
+|          | 代码块包围                     |                   | Ctrl + Alt + T     |                  |
+| 焦点切换 | 焦点切换到 Project View        |                   |                    | Alt + 1          |
+|          | 焦点切换到 Editor              |                   |                    | Esc              |
+|  编辑器  |                                |                   |                    |                  |
+|          | 软换行                         | Soft-Wrap         | Alt + W            |                  |
+|          | 当前代码块展开/折叠            | Expand / Collapse | Alt + [ / ]        |                  |
+|          | 全部代码块展开/折叠            |                   | Ctrl + Alt + [ / ] |                  |
+| 其他技能 | 方法参数提示                   | Parameter Info    |                    | Ctrl + P         |
+|          | 代码补全                       |                   | Alt + /            |                  |
+|          | 文件夹刷新(Reload From Disk)   |                   | Alt + F5           |                  |
+|          | 项目刷新(Reload All From Disk) |                   | Ctrl + Shift + F5  |                  |
 
 
 
