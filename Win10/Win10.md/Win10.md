@@ -895,7 +895,7 @@ powercfg /batteryreport
 1. 油猴
 2. 沉浸式翻译：PDF翻译
 
-## 下载crx
+## 下载crx插件
 
 > 首先每个Chrome.上的插件都有一个ID，是该插件网址上最后--串字符串，将这个ID拷贝下来。然后在下面的这个链接中，把ID替换到\<extension-id>处
 >
