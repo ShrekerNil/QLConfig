@@ -160,7 +160,19 @@ JRebel并非是免费的插件，需要激活之后才可以使用
 
 # 绿化
 
-## V2023.3.7
+## V2023.3.78
+
+### 已经验证
+
+> ideaIU-2023.3.8.win.green.7z
+
+1. 解压其中的ideaIU-2023.3.8.win.7z到安装位置
+2. 解压其中的**JetBrains全家桶激活.7z**到Documents合适的位置，不要删除
+3. 运行idea中的idea.bat，选择试用，之后推出idea
+4. 运行**JetBrains全家桶激活.7z**中合适的文件夹中的IDEA激活.vbs
+5. 等待弹框提示成功，即可打开激活的程序检查注册情况
+
+### 未经验证
 
 > https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzA4MjU4MTg2Ng==&action=getalbum&album_id=3421643864929239051
 >

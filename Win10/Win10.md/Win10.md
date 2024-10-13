@@ -370,7 +370,7 @@ icacls "D:\QLRepo" /grant Administrators:F /t /c /q
    - 记录计算机中所有用户的信息
 5. `HKEY_CURRENT_CONFIG`
 
-# 系统定制封装
+# 系统内置应用
 
 ## NTLite
 
@@ -522,13 +522,26 @@ sc.exe delete "<service-name>"
 
 > 手动激活
 >
+> [Windows 11 LTSC 2024 官方精简版！简体中文正式版ISO镜像下载](https://www.freedidi.com/15159.html)
+>
+> [Key Management Services (KMS) client activation and product keys](https://learn.microsoft.com/en-us/windows-server/get-started/kms-client-activation-keys?tabs=server2025%2Cwindows1110ltsc%2Cversion1803%2Cwindows81)
+>
 > ```
-> slmgr /ipk <key>
-> 
+> slmgr -ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D
 > slmgr /skms skms.03k.org
-> 
 > slmgr /ato
+> slmgr -dlv
 > ```
+
+## 释放虚拟内存
+
+> 系统安装默认带有大约7G左右的虚拟内存
+
+使用下列PowerShell命令释放虚拟内存：
+
+```powershell
+DISM.exe /Online /Set-ReservedStorageState /state:Disabled
+```
 
 ## 检查驱动
 
@@ -742,6 +755,12 @@ doskey ll=ls -l
        - Sarasa这个字体存在中文间距较大的问题
        - Jetbrans Mono是个纯英文字体
      - Sublime怎么配置多个fallback字体
+
+## Win11恢复应用商店
+
+```cmd
+wsreset -i
+```
 
 ## 其他
 
