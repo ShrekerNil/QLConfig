@@ -202,9 +202,9 @@ netsh winsock reset
 
 ### 打开资源管理器地址栏历史记录
 
-1. 按下Win+R组合键，在运行命令输入框中输入“gpedit.msc”后回车。
-2. 在本地组策略编辑器界面，在左侧面板依次展开“用户配置”-》"管理模版”-)Windows组件”-》“文件资源管理器”，点击选中后，在右侧窗口中找到并双击“在Windows资源管理器搜索框中关闭最近搜索条目的显示”
-3. 在Windows资源管理器搜索框中关闭最近搜索条目的显示界面，点击选中“已启用”后点击底部确定退出设置界面即可。
+1. 按下Win+R组合键，在运行命令输入框中输入"gpedit.msc"后回车。
+2. 在本地组策略编辑器界面，在左侧面板依次展开"用户配置"-》"管理模版"-)Windows组件"-》"文件资源管理器"，点击选中后，在右侧窗口中找到并双击"在Windows资源管理器搜索框中关闭最近搜索条目的显示"
+3. 在Windows资源管理器搜索框中关闭最近搜索条目的显示界面，点击选中"已启用"后点击底部确定退出设置界面即可。
 
 ## 制作软链接
 
@@ -356,7 +356,7 @@ icacls "D:\QLRepo" /grant Administrators:F /t /c /q
 
 
 
-# 注册表
+# 注册表批处理
 
 ## 注册表简介
 
@@ -370,9 +370,86 @@ icacls "D:\QLRepo" /grant Administrators:F /t /c /q
    - 记录计算机中所有用户的信息
 5. `HKEY_CURRENT_CONFIG`
 
-# 系统内置应用
+## 批处理
 
-## NTLite
+1. 日期时间批处理
+
+   - 利用注册表进行修改，例如
+
+     - 使用国家代码应用当地的时间、货币等默认样式
+
+       ```cmd
+       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v LocaleName /d en-GB /f
+       ```
+   
+     - 每一项都可以单独修改
+   
+       ```cmd
+       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sLongDate /d yyyy/MM/dd /f
+       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sShortDate /d yyyy/MM/dd /f
+       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sTimeFormat /d HH:mm:ss /f
+       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sShortTime /d HH:mm:ss /f
+       
+       RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
+       ```
+   
+   - 案例说明
+   
+     ```
+     [BAT]批处理自动修改区域和语言选项
+     open a cmd window and type
+     reg query "HKCU\Control Panel\International"
+     which will show you the values as you want them.
+     
+     Then to modify them, use 
+     REG ADD "HKCU\Control Panel\International" /t REG_SZ /v LocaleName /d es-Mx /f
+     for each value replacing what is after /v with the appropriate name and what is after /d with the appropriate value.
+     
+     For example:
+     
+     reg query "HKCU\Control Panel\International
+     REG ADD "HKCU\Control Panel\International" /t REG_SZ /v LocaleName /d en-GB /f
+     REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sCountry /d "United Kingdom" /f
+     
+     The other option is to just export the HKCU\Control Panel\International hive to a .reg file and just import it into the registry using regedit /s ImportFile.reg
+     
+     You may need to refresh the registry after the import to see the changes. This usually involves a reboot but try adding the following as the last line in your batch file instead. RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
+     ```
+     
+      - 可设置的项目(cmd运行`reg query "HKCU\Control Panel\International"`可查看)：
+     
+        | Item          | Type   | Example    |
+        | ------------- | ------ | ---------- |
+        | Locale        | REG_SZ | 00000409   |
+        | LocaleName    | REG_SZ | en-US      |
+        | sLongDate     | REG_SZ | yyyy/MM/dd |
+        | sShortDate    | REG_SZ | yyyy/MM/dd |
+        | sNativeDigits | REG_SZ | 0123456789 |
+        | sTimeFormat   | REG_SZ | HH:mm:ss   |
+        | sShortTime    | REG_SZ | HH:mm      |
+        
+
+2. 
+
+# 系统驱动
+
+## Intel Driver Assistant
+
+一般情况下, 大部分的驱动程序都会自动安装, 尽量使用官方的驱动安装器, 三方都是利益方, 都会进行捆绑等行为
+
+如果你的电脑上有很多的`Intel`的硬件, 那么安装`Intel Driver & Support Assistant`是最好的
+
+## 导出系统驱动
+
+导出Windows目前使用的驱动程序：Dism++
+
+## 微软更新下载
+
+https://catalog.update.microsoft.com/home.aspx
+
+## 系统封装
+
+NTLite下载地址：https://www.ntlite.com/download/
 
 ```
 Win自带应用全名称
@@ -466,17 +543,7 @@ Microsoft.BingNews_1.0.6.0_x64__8wekyb3d8bbwe
 Microsoft.MicrosoftEdge.Stable_95.0.1020.30_neutral__8wekyb3d8bbwe
 ```
 
-- 下载地址：https://www.ntlite.com/download/
-- 微软不定下载网址：https://catalog.update.microsoft.com/home.aspx
-- 导出Windows目前使用的驱动程序：Dism++
 
-# 系统驱动
-
-## Intel Driver Assistant
-
-一般情况下, 大部分的驱动程序都会自动安装, 尽量使用官方的驱动安装器, 三方都是利益方, 都会进行捆绑等行为
-
-如果你的电脑上有很多的`Intel`的硬件, 那么安装`Intel Driver & Support Assistant`是最好的
 
 
 
@@ -516,22 +583,27 @@ sc.exe delete "<service-name>"
 
 ## 激活
 
-> KMS工具激活
->
-> yishimei.cn
+### 手动激活
 
-> 手动激活
->
-> [Windows 11 LTSC 2024 官方精简版！简体中文正式版ISO镜像下载](https://www.freedidi.com/15159.html)
->
-> [Key Management Services (KMS) client activation and product keys](https://learn.microsoft.com/en-us/windows-server/get-started/kms-client-activation-keys?tabs=server2025%2Cwindows1110ltsc%2Cversion1803%2Cwindows81)
->
-> ```
-> slmgr -ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D
-> slmgr /skms skms.03k.org
-> slmgr /ato
-> slmgr -dlv
-> ```
+1. [Windows 11 LTSC 2024 官方精简版！简体中文正式版ISO镜像下载](https://www.freedidi.com/15159.html)
+2. [Key Management Services (KMS) client activation and product keys](https://learn.microsoft.com/en-us/windows-server/get-started/kms-client-activation-keys?tabs=server2025%2Cwindows1110ltsc%2Cversion1803%2Cwindows81)
+
+```
+slmgr -ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D
+slmgr /skms skms.03k.org
+slmgr /ato
+slmgr -dlv
+```
+
+### KMS激活
+
+#### 亦是美
+
+http://www.yishimei.cn/network/319.html
+
+#### HEU
+
+https://github.com/zbezj/HEU_KMS_Activator/releases
 
 ## 释放虚拟内存
 
@@ -568,110 +640,12 @@ DISM.exe /Online /Set-ReservedStorageState /state:Disabled
    tzutil /s "China Standard Time"
    ```
 
-2. 设置日期时间格式
+2. 设置日期时间
 
-   - 利用注册表进行修改，例如
+   ```
+   有时间做一个系统配置的批处理文件
+   ```
 
-     - 使用国家代码应用当地的时间、货币等默认样式
-
-       ```cmd
-       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v LocaleName /d en-GB /f
-       ```
-   
-     - 每一项都可以单独修改
-   
-       ```cmd
-       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sLongDate /d yyyy/MM/dd /f
-       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sShortDate /d yyyy/MM/dd /f
-       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sTimeFormat /d HH:mm:ss /f
-       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sShortTime /d HH:mm:ss /f
-       
-       RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
-       ```
-   
-   - 案例说明
-   
-     ```
-     [BAT]批处理自动修改区域和语言选项
-     open a cmd window and type reg query "HKCU\Control Panel\International" which will show you the values as you want them.
-     
-     Then to modify them, use REG ADD "HKCU\Control Panel\International" /t REG_SZ /v LocaleName /d es-Mx /f for each value replacing what is after /v with the appropriate name and what is after /d with the appropriate value.
-     
-     For example:
-     
-     reg query "HKCU\Control Panel\International
-     REG ADD "HKCU\Control Panel\International" /t REG_SZ /v LocaleName /d en-GB /f
-     REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sCountry /d "United Kingdom" /f
-     
-     The other option is to just export the HKCU\Control Panel\International hive to a .reg file and just import it into the registry using regedit /s ImportFile.reg
-     
-     You may need to refresh the registry after the import to see the changes. This usually involves a reboot but try adding the following as the last line in your batch file instead. RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
-     ```
-   
-      - 可设置的项目(cmd运行`reg query "HKCU\Control Panel\International"`可查看)：
-   
-        | Item          | Type   | Example    |
-        | ------------- | ------ | ---------- |
-        | Locale        | REG_SZ | 00000409   |
-        | LocaleName    | REG_SZ | en-US      |
-        | sLongDate     | REG_SZ | yyyy/MM/dd |
-        | sNativeDigits | REG_SZ | 0123456789 |
-        | sShortDate    | REG_SZ | yyyy/MM/dd |
-        | sTimeFormat   | REG_SZ | HH:mm:ss   |
-        | sShortTime    | REG_SZ | HH:mm      |
-        
-        ```sh
-        C:\Users\Shreker>reg query "HKCU\Control Panel\International"
-        
-        HKEY_CURRENT_USER\Control Panel\International
-            Locale    REG_SZ    00000409
-            LocaleName    REG_SZ    en-US
-            s1159    REG_SZ    AM
-            s2359    REG_SZ    PM
-            sCurrency    REG_SZ    $
-            sDate    REG_SZ    /
-            sDecimal    REG_SZ    .
-            sGrouping    REG_SZ    3;0
-            sLanguage    REG_SZ    ENU
-            sList    REG_SZ    ,
-            sLongDate    REG_SZ    yyyy/MM/dd ddd
-            sMonDecimalSep    REG_SZ    .
-            sMonGrouping    REG_SZ    3;0
-            sMonThousandSep    REG_SZ    ,
-            sNativeDigits    REG_SZ    0123456789
-            sNegativeSign    REG_SZ    -
-            sPositiveSign    REG_SZ
-            sShortDate    REG_SZ    yyyy/MM/dd ddd
-            sThousand    REG_SZ    ,
-            sTime    REG_SZ    :
-            sTimeFormat    REG_SZ    HH:mm:ss
-            sShortTime    REG_SZ    HH:mm
-            sYearMonth    REG_SZ    MMMM yyyy
-            iCalendarType    REG_SZ    1
-            iCountry    REG_SZ    1
-            iCurrDigits    REG_SZ    2
-            iCurrency    REG_SZ    0
-            iDate    REG_SZ    2
-            iDigits    REG_SZ    2
-            NumShape    REG_SZ    1
-            iFirstDayOfWeek    REG_SZ    6
-            iFirstWeekOfYear    REG_SZ    0
-            iLZero    REG_SZ    1
-            iMeasure    REG_SZ    1
-            iNegCurr    REG_SZ    0
-            iNegNumber    REG_SZ    1
-            iPaperSize    REG_SZ    1
-            iTime    REG_SZ    1
-            iTimePrefix    REG_SZ    0
-            iTLZero    REG_SZ    1
-        
-        HKEY_CURRENT_USER\Control Panel\International\Geo
-        HKEY_CURRENT_USER\Control Panel\International\LanguageComponentsAvailable
-        HKEY_CURRENT_USER\Control Panel\International\User Profile
-        HKEY_CURRENT_USER\Control Panel\International\User Profile System Backup
-        HKEY_CURRENT_USER\Control Panel\International\🌎🌏🌍
-        ```
-   
 
 ### 设置第二语言
 
@@ -723,6 +697,8 @@ doskey ll=ls -l
 ## 设置系统文件夹
 
 > 这个部分已经发现利用魔方的工具可以自助进行备份和恢复
+>
+> WinMaster恢复FolderSettings.sfbak即可
 
 | 名称   | 目标文件夹                  |
 | ------ | --------------------------- |
@@ -777,6 +753,8 @@ wsreset -i
 ### 禁用Google Chrome更新
 
 打开 `taskschd.msc`，即 `Task Scheduler`，关闭Chrome更新的计划任务
+
+这个配置在火绒计划任务中关闭
 
 
 
@@ -938,16 +916,16 @@ powercfg /batteryreport
 
 2. 使用计划任务高级设置
 
-   - 在创建计划任务时，可以设置特定的选项来避免UAC提示。具体来说，可以在创建计划任务时选择“不管用户是否登录都要运行”和“使用最高权限运行”。这样设置后，计划任务在执行时不会触发UAC提示，因为它是以系统账户的权限运行的，而不是当前登录用户的权限。
+   - 在创建计划任务时，可以设置特定的选项来避免UAC提示。具体来说，可以在创建计划任务时选择"不管用户是否登录都要运行"和"使用最高权限运行"。这样设置后，计划任务在执行时不会触发UAC提示，因为它是以系统账户的权限运行的，而不是当前登录用户的权限。
 
      这种方法的缺点是，它可能需要您在计划任务的属性中进行一些高级配置，具体步骤如下：
 
-     - 打开“任务计划程序”。
+     - 打开"任务计划程序"。
      - 创建新任务或编辑现有任务。
-     - 在“常规”选项卡中，确保勾选“不管用户是否登录都要运行”。
-     - 转到“条件”选项卡，取消勾选“仅当用户登录时才启动”。
-     - 在“操作”选项卡中，选择“启动程序”，然后选择Everything的可执行文件。
-     - 点击“属性”，在“高级”选项卡中勾选“使用最高权限运行”。
+     - 在"常规"选项卡中，确保勾选"不管用户是否登录都要运行"。
+     - 转到"条件"选项卡，取消勾选"仅当用户登录时才启动"。
+     - 在"操作"选项卡中，选择"启动程序"，然后选择Everything的可执行文件。
+     - 点击"属性"，在"高级"选项卡中勾选"使用最高权限运行"。
 
    - 配置成脚本：
 
@@ -1218,13 +1196,13 @@ Wox、Listary、uTools、火柴(火萤酱)、闪电搜索
 
 # 字体汇总
 
-> - Identifont 的 “等宽字体” 列表
+> - Identifont 的 "等宽字体" 列表
 >   [http://www.identifont.com/equal-width.html](https://link.uisdc.com/?redirect=http%3A%2F%2Fwww.identifont.com%2Fequal-width.html)
 >   
-> - David Sudweeks 的 “通用字体集”
+> - David Sudweeks 的 "通用字体集"
 >   [https://www.fontshop.com/people/david-sudweeks/fontlists/uniwidth-typefaces](https://link.uisdc.com/?redirect=https%3A%2F%2Fwww.fontshop.com%2Fpeople%2Fdavid-sudweeks%2Ffontlists%2Funiwidth-typefaces)
 >   
-> - Indra Kupferschmid 在 Fontstand 上整理的一组 “等宽字体”：
+> - Indra Kupferschmid 在 Fontstand 上整理的一组 "等宽字体"：
 >   [https://fontstand.com/collections/69697/ab1ddd85e26deaf6647be009be6a1337](https://link.uisdc.com/?redirect=https%3A%2F%2Ffontstand.com%2Fcollections%2F69697%2Fab1ddd85e26deaf6647be009be6a1337)
 >   
 > - 可商用字体汇总：公众号：Adobe素材助手
@@ -1278,7 +1256,7 @@ Wox、Listary、uTools、火柴(火萤酱)、闪电搜索
 
 | 名称                                                | 备注                                                         |
 | --------------------------------------------------- | ------------------------------------------------------------ |
-| ~~Noto Fonts/Noto Sans Mono/Noto Sans Mono CJK SC~~ | !!**Windows 用户注意**!!<br/>1、需要下载下面的 All Variable TTF/OTC 文件(因为 Win 对OTF支持的不够好)<br/>2、解压里面的Variable/TTF/Mono/NotoSansMonoCJKsc-VF.ttf;<br/>3、右键菜单选择“为所有用户安装”(不要选“安装”)<br/>4、即可解决“显示效果差”和“字体选择里找不到”的问题<br/>https://github.com/notofonts/noto-cjk<br/>经过实验，该字体不是半宽字体 |
+| ~~Noto Fonts/Noto Sans Mono/Noto Sans Mono CJK SC~~ | !!**Windows 用户注意**!!<br/>1、需要下载下面的 All Variable TTF/OTC 文件(因为 Win 对OTF支持的不够好)<br/>2、解压里面的Variable/TTF/Mono/NotoSansMonoCJKsc-VF.ttf;<br/>3、右键菜单选择"为所有用户安装"(不要选"安装")<br/>4、即可解决"显示效果差"和"字体选择里找不到"的问题<br/>https://github.com/notofonts/noto-cjk<br/>经过实验，该字体不是半宽字体 |
 | Sarasa Gothic Mono                                  | 等距更纱黑体，看起来比较好，已经安装`Sarasa Mono SC.ttf`<br/>https://github.com/be5invis/Sarasa-Gothic<br/>https://mirrors.tuna.tsinghua.edu.cn/github-release/be5invis/Sarasa-Gothic/ |
 | Inconsolata                                         | Google Fonts                                                 |
 | Ubuntu Mono                                         |                                                              |
@@ -1357,12 +1335,12 @@ Wox、Listary、uTools、火柴(火萤酱)、闪电搜索
 
 > 要修改的是一个风险项，建议不要修改
 
-1. `Win+R` 运行“ regedit“打开注册表
+1. `Win+R` 运行" regedit"打开注册表
 2. `Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` 这里面找到`EableLUA`双击打开
 3. 数值数据修改为"0"
 4. 重启电脑以后就可以了，然后就可以拖拽了
 
-# Win Batch的路径
+# Batch脚本
 
 ## 各种路径
 
