@@ -413,7 +413,8 @@ icacls "D:\QLRepo" /grant Administrators:F /t /c /q
      
      The other option is to just export the HKCU\Control Panel\International hive to a .reg file and just import it into the registry using regedit /s ImportFile.reg
      
-     You may need to refresh the registry after the import to see the changes. This usually involves a reboot but try adding the following as the last line in your batch file instead. RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
+     You may need to refresh the registry after the import to see the changes. This usually involves a reboot but try adding the following as the last line in your batch file instead. 
+     RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
      ```
      
       - 可设置的项目(cmd运行`reg query "HKCU\Control Panel\International"`可查看)：
@@ -430,6 +431,8 @@ icacls "D:\QLRepo" /grant Administrators:F /t /c /q
         
 
 2. 
+
+
 
 # 系统驱动
 
