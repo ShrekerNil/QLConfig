@@ -223,9 +223,16 @@ mklink /j <link-path> <des-path>
 
 ## 右下角日期
 
-Short Date：`MM/dd ddd`
+### 设置右下角日期时间
 
-Long Date：`yyyy/MM/dd ddd`
+1. 效果：`2024/11/01 周五`
+   - Region设置为中文
+   - 日期格式：`yyyy/MM/dd ddd`
+2. 效果：`yyyy/MM/dd 星期五`
+   - Region设置为中文
+   - 日期格式：`yyyy/MM/dd dddd`
+
+
 
 ## 常用系统命令
 
@@ -381,65 +388,65 @@ icacls "D:\QLRepo" /grant Administrators:F /t /c /q
 
 ## 批处理
 
-1. 日期时间批处理
+### 日期时间批处理
 
-   - 利用注册表进行修改，例如
+- 利用注册表进行修改，例如
 
-     - 使用国家代码应用当地的时间、货币等默认样式
+  - 使用国家代码应用当地的时间、货币等默认样式
 
-       ```cmd
-       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v LocaleName /d en-GB /f
-       ```
-   
-     - 每一项都可以单独修改
-   
-       ```cmd
-       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sLongDate /d yyyy/MM/dd /f
-       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sShortDate /d yyyy/MM/dd /f
-       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sTimeFormat /d HH:mm:ss /f
-       REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sShortTime /d HH:mm:ss /f
-       
-       RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
-       ```
-   
-   - 案例说明
-   
-     ```
-     [BAT]批处理自动修改区域和语言选项
-     open a cmd window and type
-     reg query "HKCU\Control Panel\International"
-     which will show you the values as you want them.
-     
-     Then to modify them, use 
-     REG ADD "HKCU\Control Panel\International" /t REG_SZ /v LocaleName /d es-Mx /f
-     for each value replacing what is after /v with the appropriate name and what is after /d with the appropriate value.
-     
-     For example:
-     
-     reg query "HKCU\Control Panel\International
-     REG ADD "HKCU\Control Panel\International" /t REG_SZ /v LocaleName /d en-GB /f
-     REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sCountry /d "United Kingdom" /f
-     
-     The other option is to just export the HKCU\Control Panel\International hive to a .reg file and just import it into the registry using regedit /s ImportFile.reg
-     
-     You may need to refresh the registry after the import to see the changes. This usually involves a reboot but try adding the following as the last line in your batch file instead. 
-     RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
-     ```
-     
-      - 可设置的项目(cmd运行`reg query "HKCU\Control Panel\International"`可查看)：
-     
-        | Item          | Type   | Example    |
-        | ------------- | ------ | ---------- |
-        | Locale        | REG_SZ | 00000409   |
-        | LocaleName    | REG_SZ | en-US      |
-        | sLongDate     | REG_SZ | yyyy/MM/dd |
-        | sShortDate    | REG_SZ | yyyy/MM/dd |
-        | sNativeDigits | REG_SZ | 0123456789 |
-        | sTimeFormat   | REG_SZ | HH:mm:ss   |
-        | sShortTime    | REG_SZ | HH:mm      |
-        
+    ```cmd
+    REG ADD "HKCU\Control Panel\International" /t REG_SZ /v LocaleName /d en-GB /f
+    ```
 
-2. 
+  - 每一项都可以单独修改
+
+    ```cmd
+    REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sLongDate /d yyyy/MM/dd /f
+    REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sShortDate /d yyyy/MM/dd /f
+    REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sTimeFormat /d HH:mm:ss /f
+    REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sShortTime /d HH:mm:ss /f
+    
+    RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
+    ```
+
+- 案例说明
+
+  ```
+  [BAT]批处理自动修改区域和语言选项
+  open a cmd window and type
+  reg query "HKCU\Control Panel\International"
+  which will show you the values as you want them.
+  
+  Then to modify them, use 
+  REG ADD "HKCU\Control Panel\International" /t REG_SZ /v LocaleName /d es-Mx /f
+  for each value replacing what is after /v with the appropriate name and what is after /d with the appropriate value.
+  
+  For example:
+  
+  reg query "HKCU\Control Panel\International
+  REG ADD "HKCU\Control Panel\International" /t REG_SZ /v LocaleName /d en-GB /f
+  REG ADD "HKCU\Control Panel\International" /t REG_SZ /v sCountry /d "United Kingdom" /f
+  
+  The other option is to just export the HKCU\Control Panel\International hive to a .reg file and just import it into the registry using regedit /s ImportFile.reg
+  
+  You may need to refresh the registry after the import to see the changes. This usually involves a reboot but try adding the following as the last line in your batch file instead. 
+  RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
+  ```
+  
+   - 可设置的项目(cmd运行`reg query "HKCU\Control Panel\International"`可查看)：
+  
+     | Item          | Type   | Example    |
+     | ------------- | ------ | ---------- |
+     | Locale        | REG_SZ | 00000409   |
+     | LocaleName    | REG_SZ | en-US      |
+     | sLongDate     | REG_SZ | yyyy/MM/dd |
+     | sShortDate    | REG_SZ | yyyy/MM/dd |
+     | sNativeDigits | REG_SZ | 0123456789 |
+     | sTimeFormat   | REG_SZ | HH:mm:ss   |
+     | sShortTime    | REG_SZ | HH:mm      |
+     
+
+
 
 
 
@@ -753,6 +760,89 @@ wsreset -i
 ## 其他
 
 1. 系统配置对话框：msconfig
+
+
+
+# 禁止EXE启动
+
+## GPEDIT.MSC
+
+> - powershell.exe -ExecutionPolicy Bypass -File .\PreventExeRunning.ps1
+> - 脚本有问题，移除的时候会报错
+
+1. 按 Win + R 打开运行对话框，输入 gpedit.msc 并按回车，打开组策略编辑器。
+2. 在左侧导航栏中，依次展开 用户配置 > 管理模板 > 系统。
+3. 在右侧找到并双击 不要运行指定的Windows应用程序。
+4. 选择 已启用。
+5. 点击 显示... 按钮。
+6. 在弹出的窗口中，点击 添加... 按钮，输入要阻止的.exe文件的完整路径，例如 C:\Program Files\SomeApp\SomeApp.exe，然后点击 确定。
+7. 重复步骤6，直到添加所有要阻止的.exe文件。
+8. 点击 应用 和 确定 以保存更改。
+
+## SECPOL.MSC
+
+> 本地安全策略编辑器
+>
+> > **注意**：**该方法不可用，因为执行了第二步，所有的应用在重启之后都会被阻止启动，目前不知道解决方案**
+
+1. 打开secpol.msc
+2. 展开 Security Settings → Software Restriction Policies，右键新建，Additional Rules 右侧右键 New Hash Rule ...
+3. 在出现的"New Hash Rule"窗口中，点击"Browse..."按钮，找到并打开要禁止运行的exe，一旦文件被选中，"File Infomation"部分将填充有关该文件的信息
+4. 在"Security Level"部分，选择"Disallowed"以阻止该文件运行
+5. 点击"OK"保存新的哈希规则
+
+相关脚本：
+
+```powershell
+Param(
+    [Parameter(Mandatory=$true)]
+    [string]$ExePath
+)
+
+# 获取脚本运行的当前用户
+$CurrentUser = "$env:USERDOMAIN\$env:USERNAME"
+
+# 创建Software Restriction Policies路径
+$SoftwareRestrictionPoliciesPath = "HKCU:\Software\Policies\Microsoft\Windows\Safer\CodeIdentifiers"
+
+# 检查Software Restriction Policies路径是否存在，如果不存在则创建
+if (-not (Test-Path -Path $SoftwareRestrictionPoliciesPath)) {
+    New-Item -Path "HKCU:\Software\Policies\Microsoft\Windows\Safer\CodeIdentifiers" -Force
+}
+
+# 设置强制级别为不允许
+Set-ItemProperty -Path $SoftwareRestrictionPoliciesPath -Name "DefaultLevel" -Value 0
+
+# 获取哈希值
+$FileHash = (Get-FileHash -Algorithm SHA256 -Path $ExePath).Hash
+
+# 创建哈希规则路径
+$HashRulePath = "HKCU:\Software\Policies\Microsoft\Windows\Safer\CodeIdentifiers\Paths\{$((New-Guid).Guid)}"
+
+# 创建哈希规则
+New-Item -Path $HashRulePath -Force
+Set-ItemProperty -Path $HashRulePath -Name "Description" -Value "Blocked by PowerShell Script"
+Set-ItemProperty -Path $HashRulePath -Name "LastModified" -Value (Get-Date).ToString("yyyy-MM-ddTHH:mm:ss")
+Set-ItemProperty -Path $HashRulePath -Name "SaferFlags" -Value 0
+Set-ItemProperty -Path $HashRulePath -Name "ItemData" -Value $ExePath
+Set-ItemProperty -Path $HashRulePath -Name "ItemDataFormat" -Value 1
+Set-ItemProperty -Path $HashRulePath -Name "ItemDataLength" -Value $ExePath.Length
+Set-ItemProperty -Path $HashRulePath -Name "ItemDataHash" -Value $FileHash
+Set-ItemProperty -Path $HashRulePath -Name "ItemDataLevel" -Value 0
+
+Write-Host "The executable '$ExePath' has been added to the Software Restriction Policies and will be blocked from running."
+
+```
+
+脚本用法：
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\PreventExeRunning.ps1 -ExePath "C:\Programs\Kingsoft\WPSOffice\12.8.2.18205\office6\wpscloudsvr.exe"
+```
+
+
+
+
 
 # 禁用更新
 
