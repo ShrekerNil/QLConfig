@@ -886,6 +886,14 @@ powercfg /batteryreport
 
 # 浏览器相关
 
+## 搜索引擎
+
+```
+https://www.baidu.com/s?ie=utf-8&wd=%s
+```
+
+
+
 ## 快捷键
 
 > [Keyboard shortcuts in Microsoft Edge - Microsoft Support](https://support.microsoft.com/en-us/microsoft-edge/keyboard-shortcuts-in-microsoft-edge-50d3edab-30d9-c7e4-21ce-37fe2713cfad)
