@@ -1000,7 +1000,36 @@ https://www.baidu.com/s?ie=utf-8&wd=%s
 > Chrome插件快捷键设置页面：chrome://extensions/shortcuts
 
 1. 油猴
+
 2. 沉浸式翻译：PDF翻译
+
+3. 划词翻译
+
+   - 添加国内谷歌翻译镜像即可使用谷歌翻译：https://wuzuhua.cn/1692.html
+
+     ```
+     http://t.yuxuantech.com
+     https://google-translate-proxy.tantu.com
+     https://tr.iass.top
+     https://translate.industrysourcing.com
+     https://translate.yunkuerp.cn
+     https://translate.renwole.com
+     https://ts.996.vin
+     https://57650aef.vvvvvv.pages.dev
+     https://gt1.yifan.ai
+     https://translate.willbon.top
+     https://translate.wuliwala.net
+     https://www.lvshitou.com
+     https://seele.saobby.com
+     https://gtranslate.darkluna.top
+     http://a.bomea.com
+     https://translate.yunkuerp.cn
+     https://translate.renwole.com
+     http://fy.qtjx.net
+     ```
+
+     
+
 
 ## 下载crx插件
 
