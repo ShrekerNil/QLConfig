@@ -7,8 +7,8 @@ echo "Configing global user.email=shrekernil@qq.com ..."
 git config --global user.email shrekernil@qq.com
 
 # reject mix line endings
-echo "Configing global core.safecrlf=true ..."
-git config --global core.safecrlf warn
+echo "Configing git config --global core.safecrlf true ..."
+git config --global core.safecrlf true
   #拒绝提交包含混合换行符的文件
   # git config --global core.safecrlf true
   #允许提交包含混合换行符的文件
@@ -17,8 +17,8 @@ git config --global core.safecrlf warn
   # git config --global core.safecrlf warn
 
 # translate to LF when commit, not change when checkout
-echo "Configing global core.autocrlf=input ..."
-git config --global core.autocrlf input
+echo "git config --global core.autocrlf=false ..."
+git config --global core.autocrlf false
   #提交时转换为LF，检出时转换为CRLF
   # git config --global core.autocrlf true   
   #提交时转换为LF，检出时不转换
@@ -28,9 +28,9 @@ git config --global core.autocrlf input
 
 # all in UTF-8
 # git config --global gui.encoding utf-8
-# git config --global i18n.commitencoding utf-8
-# git config --global i18n.logoutputencoding utf-8
-# export LESSCHARSET=utf-8
+git config --global i18n.commitencoding utf-8
+git config --global i18n.logoutputencoding utf-8
+export LESSCHARSET=utf-8
 
 # 解决git status不能显示中文
 # source: https://zhuanlan.zhihu.com/p/133706032
@@ -76,4 +76,4 @@ echo "Configing global core.ignorecase false ..."
 git config --global core.ignorecase false
 
 echo -e "\n"
-read -p "PRESS ENTER TO EXIT ... "
+read -p "PRESS [ENTER] TO EXIT ... "
