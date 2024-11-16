@@ -1,5 +1,6 @@
 #!/bin/sh
-#============ get the file name ===========
+
+exec > >(tee "${CUR_DIR}/sync.log") 2>&1
 
 function echo_sucess() {
     echo -e "GIT-SYNC-CTRL:" "\033[32m$1\033[0m"
@@ -90,7 +91,7 @@ function start_process() {
 
 CUR_DIR='/d/QLRepo'
 
-start_process ${CUR_DIR} | tee ${CUR_DIR}/sync.log
+start_process ${CUR_DIR}
 
 new_line
 
