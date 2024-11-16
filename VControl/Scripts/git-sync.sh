@@ -71,10 +71,13 @@ function judgement() {
     fi
 }
 
+SCRIPT_SOURCE="$1"
+IFS=' ' read -r -a SCRIPT_SOURCE <<< "$SCRIPT_SOURCE"
+
 RUNNING_DIRECTLY=true
 
-if [[ "${#BASH_SOURCE[@]}" -gt 1 ]]; then
-    echo "Current Script ($0) is being called by (${BASH_SOURCE[${#BASH_SOURCE[@]}-1]})"
+if [[ "${#SCRIPT_SOURCE[@]}" -ge 1 ]]; then
+    echo "Current Script ($0) is being called by (${SCRIPT_SOURCE[${#SCRIPT_SOURCE[@]}-1]})"
     RUNNING_DIRECTLY=false
     COMMIT_MSG="-- Batch Commit Automaticly --"
 
