@@ -32,10 +32,10 @@ function new_line() {
 arr_excludes=("/d/QLRepo/Temps")
 
 function check_excludes() {
-    local cur_dir="$1"
+    local CUR_DIR="$1"
     for exclude in "${arr_excludes[@]}"
     do
-        if [[ "$cur_dir" == "$exclude" ]]; then
+        if [[ "$CUR_DIR" == "$exclude" ]]; then
             return 0
         fi
     done
@@ -44,15 +44,15 @@ function check_excludes() {
 
 
 function start_process() {
-    local cur_dir=$1
+    local CUR_DIR=$1
     new_line
     echo_purplebg_whitetext "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-    echo_info               "+  Start Synchronizing Root: ${cur_dir}"
+    echo_info               "+  Start Synchronizing Root: ${CUR_DIR}"
     echo_purplebg_whitetext "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
-    # echo ${cur_dir} >> test.txt
+    # echo ${CUR_DIR} >> test.txt
 
-    for sub_dir in ${cur_dir}/*; do
+    for sub_dir in ${CUR_DIR}/*; do
         if test -d ${sub_dir} ; then
             cd ${sub_dir}
             new_line
@@ -86,11 +86,11 @@ function start_process() {
     done
 }
 
-# cur_dir="$( cd "$( dirname "$0"  )" && pwd )"
+# CUR_DIR="$( cd "$( dirname "$0"  )" && pwd )"
 
-cur_dir='/d/QLRepo'
+CUR_DIR='/d/QLRepo'
 
-start_process ${cur_dir}
+start_process ${CUR_DIR} | tee ${CUR_DIR}/sync.log
 
 new_line
 

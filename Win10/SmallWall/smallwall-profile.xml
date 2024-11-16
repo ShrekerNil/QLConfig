@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root version="5" type="3" timestamp="1731764849">
+	<apps>
+		<item path="CryptSvc" timestamp="1575710107" is_undeletable="true"/>
+		<item path="Dhcp" timestamp="1575710107" is_undeletable="true"/>
+		<item path="Dnscache" timestamp="1575710164" is_undeletable="true"/>
+		<item path="DoSvc" timestamp="1728760212" is_undeletable="true"/>
+		<item path="NlaSvc" timestamp="1575710107" is_undeletable="true"/>
+		<item path="Spooler" timestamp="1575710107" is_undeletable="true"/>
+		<item path="UsoSvc" timestamp="1575710107" is_undeletable="true"/>
+		<item path="wlidsvc" timestamp="1575710164" is_undeletable="true"/>
+		<item path="wuauserv" timestamp="1728822746" is_undeletable="true"/>
+		<item path="S-1-15-2-283421221-3183566570-1718213290-751554359-3541592344-2312209569-3374928651" timestamp="1728765179" is_silent="true"/>
+		<item path="C:\Windows\system32\SppExtComObj.exe" timestamp="1731755624" is_undeletable="true"/>
+		<item path="C:\Windows\system32\lsass.exe" timestamp="1731755624" is_undeletable="true"/>
+		<item path="D:\Programs\Tools\System\SimpleWall\SimpleWall.exe" timestamp="1731755624" is_undeletable="true"/>
+		<item path="System" timestamp="1731755624" is_undeletable="true" is_silent="true"/>
+		<item path="C:\Windows\system32\svchost.exe" timestamp="1731755624" is_undeletable="true" is_silent="true"/>
+		<item path="C:\program files\bravesoftware\brave-browser\application\brave.exe" timestamp="1731755659" is_enabled="true"/>
+		<item path="D:\programs\bilibili\bilibili\哔哩哔哩.exe" timestamp="1731755664" is_enabled="true"/>
+		<item path="C:\programs\tencent\wechat\wechat.exe" timestamp="1731755668" is_enabled="true"/>
+		<item path="C:\programs\sogouinput\8.3.0.9617\sogoucloud.exe" timestamp="1731755703" is_enabled="true"/>
+		<item path="D:\programs\tools\wall\v2raync\bin\xray\xray.exe" timestamp="1731756055" is_enabled="true"/>
+		<item path="C:\programs\git\usr\bin\ssh.exe" timestamp="1731756660" is_enabled="true"/>
+		<item path="C:\windows\system32\taskhostw.exe" timestamp="1731757736" is_silent="true"/>
+		<item path="C:\programs\sogouinput\8.3.0.9617\sgdownload.exe" timestamp="1731758538" is_silent="true"/>
+		<item path="C:\programs\sogouinput\8.3.0.9617\sgtool.exe" timestamp="1731758538" is_silent="true"/>
+		<item path="C:\programs\sogouinput\8.3.0.9617\sgnews.exe" timestamp="1731758583"/>
+		<item path="C:\programs\huorong\sysdiag\bin\hrupdate.exe" timestamp="1731759308" is_enabled="true"/>
+		<item path="C:\programs\huorong\sysdiag\bin\bugreport.exe" timestamp="1731759308" is_enabled="true"/>
+		<item path="C:\programs\sogouinput\components\picface\1.0.0.1872\sgpicfacetool.exe" timestamp="1731761137" is_silent="true"/>
+		<item path="C:\programs\sogouinput\8.3.0.9617\usernetschedule.exe" timestamp="1731764421" is_silent="true"/>
+		<item path="C:\programs\sogouinput\8.3.0.9617\pinyinup.exe" timestamp="1731764423"/>
+	</apps>
+	<rules_custom>
+	</rules_custom>
+	<rules_config>
+	</rules_config>
+</root>
