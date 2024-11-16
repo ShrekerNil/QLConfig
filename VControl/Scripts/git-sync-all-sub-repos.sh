@@ -2,12 +2,8 @@
 
 exec > >(tee "${CUR_DIR}/sync.log") 2>&1
 
-print_call_stack() {
-    echo "调用链："
-    for i in $(seq 0 $((${#BASH_SOURCE[@]} - 1))); do
-        echo "  $i: ${BASH_SOURCE[$i]}:${BASH_LINENO[$i]}"
-    done
-}
+declare -a SCRIPT_SOURCE
+SCRIPT_SOURCE+=("${BASH_SOURCE[0]}")
 
 export -f print_call_stack
 
@@ -81,7 +77,8 @@ function start_process() {
                     echo_info "Synchronizing AUTO Git Repo: ${sub_dir}"
                     new_line
                     # bash /d/QLRepo/QLNotes/Config/VControl/Scripts/git-sync.sh `pwd`
-                    bash ${sub_dir}/git-sync.sh `pwd` print_call_stack
+                    printf -v array_str "%s " "${SCRIPT_SOURCE[@]}"
+                    bash ${sub_dir}/git-sync.sh `pwd` "$array_str"
                     continue
                 else
                     new_line
