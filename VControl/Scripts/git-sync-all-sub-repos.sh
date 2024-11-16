@@ -39,16 +39,15 @@ function check_excludes() {
     return 1
 }
 
-
 function start_process() {
     local CUR_DIR=$1
     new_line
     echo_purplebg_whitetext "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
     echo_info               "+  Start Synchronizing Root: ${CUR_DIR}"
     echo_purplebg_whitetext "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-
+    
     # echo ${CUR_DIR} >> test.txt
-
+    
     for sub_dir in ${CUR_DIR}/*; do
         if test -d ${sub_dir} ; then
             cd ${sub_dir}
@@ -56,12 +55,12 @@ function start_process() {
             echo_bluebg_whitetext ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
             echo_info             "  Found Sub Dir: `basename ${sub_dir}`"
             echo_bluebg_whitetext "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-
+            
             if check_excludes ${sub_dir}; then
                 echo_info "${sub_dir} excluded, Skipping ...";
                 continue
             fi
-
+            
             if [[ -d "${sub_dir}/.git" ]]; then
                 if [[ -f "mine" ]]; then
                     new_line
@@ -91,7 +90,7 @@ SCRIPT_SOURCE+=("${BASH_SOURCE[0]}")
 
 CUR_DIR='/d/QLRepo'
 
-exec > >(tee "${CUR_DIR}/sync.log") 2>&1
+exec > >(tee "/d/git_sync.log") 2>&1
 
 ARR_EXCLUDES=("/d/QLRepo/Temps")
 
