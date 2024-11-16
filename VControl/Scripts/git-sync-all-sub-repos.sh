@@ -9,6 +9,8 @@ print_call_stack() {
     done
 }
 
+export -f print_call_stack
+
 function echo_sucess() {
     echo -e "GIT-SYNC-CTRL:" "\033[32m$1\033[0m"
 }
@@ -79,7 +81,7 @@ function start_process() {
                     echo_info "Synchronizing AUTO Git Repo: ${sub_dir}"
                     new_line
                     # bash /d/QLRepo/QLNotes/Config/VControl/Scripts/git-sync.sh `pwd`
-                    bash ${sub_dir}/git-sync.sh `pwd` $print_call_stack
+                    bash ${sub_dir}/git-sync.sh `pwd` print_call_stack
                     continue
                 else
                     new_line
