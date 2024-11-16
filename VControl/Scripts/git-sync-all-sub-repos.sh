@@ -1,12 +1,5 @@
 #!/bin/sh
 
-exec > >(tee "${CUR_DIR}/sync.log") 2>&1
-
-declare -a SCRIPT_SOURCE
-SCRIPT_SOURCE+=("${BASH_SOURCE[0]}")
-
-export -f print_call_stack
-
 function echo_sucess() {
     echo -e "GIT-SYNC-CTRL:" "\033[32m$1\033[0m"
 }
@@ -35,11 +28,9 @@ function new_line() {
     echo -e "\n"
 }
 
-arr_excludes=("/d/QLRepo/Temps")
-
 function check_excludes() {
     local CUR_DIR="$1"
-    for exclude in "${arr_excludes[@]}"
+    for exclude in "${ARR_EXCLUDES[@]}"
     do
         if [[ "$CUR_DIR" == "$exclude" ]]; then
             return 0
@@ -95,7 +86,14 @@ function start_process() {
 
 # CUR_DIR="$( cd "$( dirname "$0"  )" && pwd )"
 
+declare -a SCRIPT_SOURCE
+SCRIPT_SOURCE+=("${BASH_SOURCE[0]}")
+
 CUR_DIR='/d/QLRepo'
+
+exec > >(tee "${CUR_DIR}/sync.log") 2>&1
+
+ARR_EXCLUDES=("/d/QLRepo/Temps")
 
 start_process ${CUR_DIR}
 
