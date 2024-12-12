@@ -566,11 +566,22 @@ Microsoft.MicrosoftEdge.Stable_95.0.1020.30_neutral__8wekyb3d8bbwe
 
 
 
-# 删除服务
+# Win10系统服务
+
+## 管理员运行"Run"
+
+1. 调出"Run"面板
+   - Cmd + R
+   - 开始按钮右键
+2. 输入要运行的命令
+3. 使用快捷键管理员运行
+   - Ctrl + Shift + Enter
+
+## 删除服务
 
 > 来源: https://sysin.org/blog/delete-windows-service-in-powershell/
 
-## CMD 删除Windows服务
+### CMD 删除Windows服务
 
 ```bat
 sc delete "<service-name>"
@@ -578,7 +589,7 @@ sc delete "<service-name>"
 
 在 PowerShell 中执行上述命令并没有报错(没有任何提示)，但是实际上服务并没有被删除。
 
-## PowerShell 删除Windows服务
+### PowerShell 删除Windows服务
 
 在 PowerShell 中，sc 是 cmdlet `Set-Content` 的别名，应该这样使用(加上 .exe)：
 
@@ -844,19 +855,106 @@ powershell.exe -ExecutionPolicy Bypass -File .\PreventExeRunning.ps1 -ExePath "C
 
 
 
-# 禁用更新
+# 系统禁用
 
-## 禁用系统更新
+## 禁用更新
+
+### 禁用系统更新
 
 
 
-## 禁用软件更新
+### 禁用软件更新
 
-### 禁用Google Chrome更新
+#### 禁用Google Chrome更新
 
 打开 `taskschd.msc`，即 `Task Scheduler`，关闭Chrome更新的计划任务
 
 这个配置在火绒计划任务中关闭
+
+
+
+## 禁用启动
+
+### 线索1
+
+```
+SmallWall是一款windows上限制应用联网的小工具，我喜欢折腾电脑，现在希望找到一款可以阻止应用运行的工具，类似SmallWall的工具，这个有吗
+```
+
+如果您正在寻找类似于SmallWall的工具，用于阻止应用在Windows上运行，以下是一些推荐的选项：
+1. ~~Simple Run Blocker~~: 这是一个简单、小巧且免费的软件，用于禁用或屏蔽特定软件。您只需将希望屏蔽的软件快捷方式或exe文件拖放到它的列表中，它便会自动限制这些软件，使它们不能启动。它还提供了隐藏或禁用硬盘磁盘分区的功能，有助于保护重要资料。已经尝试，该工具无效，无法拦截微信扩展程序
+2. Windows组策略（Group Policy）: 对于Windows专业版及以上版本，组策略允许用户设置规则，禁止特定程序运行。这需要通过本地组策略编辑器进行配置。
+3. 注册表编辑器（Regedit）: 在Windows系统中，注册表可以用来手动限制某些应用程序的运行。这涉及到在注册表编辑器中创建和修改特定的键值。
+4. **AppLocker**: 这是Windows 11、Windows 10和一些服务器版本中内置的应用程序。AppLocker用于控制哪些应用程序和程序可以在您的系统上运行，包括可执行文件、脚本、Windows Installer文件等。
+这些工具和方法各有优劣，适用于不同的场景和需求。例如，Simple Run Blocker操作简单，适合快速阻止应用运行，而AppLocker则更适合企业环境，提供更细致的控制。根据您的具体需求选择合适的工具。
+
+### 线索2
+
+> 已经验证，可以完成阻止应用启动的作用，可以制作成一个cmd脚本
+
+```
+AppLocker如何使用
+```
+
+AppLocker 是 Windows 操作系统中的一个功能，用于控制用户可以在计算机上运行的应用程序和文件。它可以基于文件类型、发布者、路径或哈希值来定义规则，从而限制或允许特定应用程序的运行。以下是使用 AppLocker 的基本步骤：
+
+#### 启用 AppLocker
+
+- **打开本地安全策略**：
+  1. 按 `Win + R` 键，输入 `secpol.msc`，然后按回车。
+  2. 在“本地安全策略”窗口中，展开“应用程序控制策略”，然后选择“AppLocker”。
+
+- **启动 Application Identity 服务**：
+  - AppLocker 依赖于 Application Identity 服务来执行策略。确保该服务正在运行：
+    1. 按 `Win + R` 键，输入 `services.msc`，然后按回车。
+    2. 在服务列表中找到“Application Identity”，右键点击并选择“启动”。
+
+#### 创建 AppLocker 规则
+
+- **创建可执行文件规则**：
+  1. 在“AppLocker”下，右键点击“可执行文件规则”，选择“创建默认规则”或“创建新规则”。
+  2. 选择“创建新规则”后，按照向导步骤进行设置：
+     - **权限**：选择“允许”或“拒绝”。
+     - **用户或组**：指定规则适用的用户或用户组。
+     - **条件**：选择基于发布者、路径或哈希值来定义规则。
+     - **例外**：可以设置例外情况，例如允许某些用户运行特定程序。
+
+- **创建脚本规则**：
+  - 类似地，可以为脚本文件（如 .ps1、.bat 等）创建规则，以确保只有授权的脚本可以运行。
+
+- **创建 Windows Installer 规则**：
+  - 控制哪些 Windows Installer 包（.msi、.msp）可以安装。
+
+#### 配置规则强制
+
+- 在“AppLocker”属性中，确保“已配置”选项被选中，并根据需要启用或禁用特定类型的规则强制执行。
+
+#### 测试和部署
+
+- **测试规则**：
+  - 在应用规则之前，建议在测试环境中验证规则的有效性，以避免意外阻止必要的应用程序。
+
+- **部署规则**：
+  - 使用组策略管理控制台 (GPMC) 将 AppLocker 策略应用到组织中的多台计算机。
+
+#### 使用 PowerShell 管理 AppLocker
+
+- AppLocker 提供了 PowerShell cmdlet，可以用于创建、修改和管理策略。例如，可以使用 `Get-AppLockerPolicy` 和 `Set-AppLockerPolicy` 来查看和设置策略。
+
+#### 注意事项
+
+- **安全性**：AppLocker 是一种深层防御安全功能，不应被视为唯一的防御措施。应结合其他安全措施使用。
+- **兼容性**：在部署 AppLocker 策略之前，确保所有必要的应用程序都已列入允许列表，以避免影响用户的工作效率。
+
+通过以上步骤，您可以有效地使用 AppLocker 来管理和控制组织中计算机上的应用程序和文件的使用。
+
+## 禁用联网
+
+### SmallWall
+
+**已经验证，很管用**
+
+
 
 
 
