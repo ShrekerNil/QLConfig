@@ -102,4 +102,4 @@ echo_sucess "All Work Done!"
 
 new_line
 
-read -p "PRESSING ENTER TO EXIT ... "
+read -p "PRESSING [Enter] TO EXIT ... "
