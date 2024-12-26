@@ -1,10 +1,13 @@
 {
+    "ignored_packages":
+    [
+        "Vintage",
+    ],
     "always_prompt_for_file_reload": true,
     "auto_complete": true,
     "auto_complete_commit_on_tab": false,
     "auto_hide_menu": false,
     "auto_hide_tabs": false,
-    "auto_wrap_break_long_word": true,
     "block_caret": false,
     "bold_folder_labels": true,
     "caret_extra_bottom": 0,
@@ -21,12 +24,12 @@
     "file_tab_style": "rounded",
     "fold_buttons": true,
     "font_options": ["gdi","no_bold"],
-    "font_size": 13,
+    "font_size": 12,
     "hide_new_tab_button": true,
     "hide_tab_scrolling_buttons": false,
     "highlight_line": true,
     "highlight_modified_tabs": true,
-    "index_files": true,
+    "index_files": false,
     "line_numbers": true,
     "line_padding_bottom": 1,
     "line_padding_top": 1,
@@ -47,12 +50,7 @@
     /*"font_face": "JetBrains Mono",*/
     /*"font_face": "Microsoft YaHei UI Light",*/
     /*"font_face": "Microsoft YaHei UI",*/
-    "font_face": "Microsoft YaHei",
     /*"font_face": "NSimSun",*/
     /*"font_face": "新宋体",*/
-    /*"font_face": "Sarasa Mono SC",*/
-    "ignored_packages":
-    [
-		"Vintage",
-    ],
+    "word_separators": "./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?，。《》"
 }
