@@ -607,6 +607,21 @@ sc.exe delete "<service-name>"
 | PowerShell 调用 CMD | sc.exe start "<service-name>"        | sc.exe stop "<service-name>"       | sc.exe delete "<service-name>"                               |
 | PowerShell          | Start-Service -name "<service-name>" | Stop-Service-name "<service-name>" | Remove-Service-name "<service-name>" <br/>(慎用！仅在 PS v6 及以上有效) |
 
+# 安装系统之前
+
+## 备份内容
+
+### 浏览器
+
+1. 备份浏览器书签
+2. 备份浏览器插件
+
+## 上传备份
+
+### 输入法
+
+同步配置到云端，方便下次快速恢复配置
+
 # 安装Win10
 
 > 关于英文系统中文扭曲的问题，问题的关键是：系统默认字体不支持中文，所以要安装一个支持文中的默认字体，noMeiryoUI就可以实现
